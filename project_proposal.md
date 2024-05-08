@@ -82,10 +82,10 @@ Labeling is a great way to separate out your tasks and to track progress. Hereâ€
 | Type          | If a frontend/backend task is large at scale (for example: more than 100 additional lines or changes), it might be a good idea to separate these tasks out into their own individual task. If a feature is smaller at scale (not more than 10 files changed), labeling it as fullstack would be suitable to review all at once. | Frontend, Backend, Fullstack |
 | Stretch Goals | You can also label certain tasks as stretch goals - as a nice to have, but not mandatory for completing this project.                                                                                                                                                                                                           
 
-Goal      Plot out a span of bitcoin fluctuation with matplot|
-Goal      graph out blockchain information
+Goal      implement a small mini game to break the code simulating what miners do to help keep the blockchain secure.
+Goal      create block for each buy and sell transaction
 
 
 
 
-| Must Have, A way to showcase the staking process and the profit that can be made with it despite bitcoin fluctuation.
+| Must Have, the ability to buy and sell bitcoin, and have a way to create simulated blockchain blocks to simulate what happens when transactions take place.
