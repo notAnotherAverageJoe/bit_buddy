@@ -83,7 +83,7 @@ Labeling is a great way to separate out your tasks and to track progress. Hereâ€
 | Stretch Goals | You can also label certain tasks as stretch goals - as a nice to have, but not mandatory for completing this project.                                                                                                                                                                                                           
 
 Goal      implement a small mini game to break the code simulating what miners do to help keep the blockchain secure.
-Goal      create block for each buy and sell transaction
+Goal      create a table to graph out staked coins
 
 
 
