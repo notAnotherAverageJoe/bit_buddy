@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Cryptocurrencies</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1>Thank you for stopping by! We hope you learned a lot about the awesome world of cryptocurrencies!</h1>
+<h2>Be sure to Commemorate the moment and make an honorary cryptocoin!</h2>
+
+<ul id="cryptocurrencies-list">
+</ul>
+
+<h2>Add a new cryptocurrency!</h2>
+
+<form id="new-cryptocurrency-form">
+  <div>
+    <label for="form-name">Name: </label>
+    <input name="name" id="form-name">
+  </div>
+
+  <div>
+    <label for="form-symbol">Symbol: </label>
+    <input name="symbol" id="form-symbol">
+  </div>
+
+  <div>
+    <label for="form-descriptions">Description: </label>
+    <input name="descriptions" id="form-descriptions">
+</div>
+
+
+  <button>Add!</button>
+</form>
+
+<script src="https://unpkg.com/jquery"></script>
+<script src="https://unpkg.com/axios/dist/axios.js"></script>
+<script src="/static/cryptocurrencies.js"></script>
+
+</body>
+</html>

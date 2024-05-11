@@ -1,0 +1,30 @@
+-- Drop the database if it already exists
+DROP DATABASE IF EXISTS cryptopal;
+
+-- Create the database "bitbuddy"
+CREATE DATABASE cryptopal;
+
+
+CREATE TABLE Users (
+    id INTEGER PRIMARY KEY,
+    username TEXT,
+    email TEXT,
+    password_hash TEXT
+);
+
+CREATE TABLE Cryptocurrency (
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    symbol TEXT,
+    price NUMERIC,
+    purpose TEXT
+);
+
+CREATE TABLE TransactionHistory (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER,
+    FOREIGN KEY (user_id) REFERENCES Users(id),
+    transaction_type TEXT,
+    amount NUMERIC,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
