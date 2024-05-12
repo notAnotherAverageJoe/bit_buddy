@@ -81,7 +81,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Step 2: Create Trigger for Updates
+--  Create Trigger for Updates
 CREATE TRIGGER prevent_update_bitcoin_trigger
 BEFORE UPDATE ON cryptocurrency
 FOR EACH ROW

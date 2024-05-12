@@ -57,28 +57,7 @@ from werkzeug.security import check_password_hash
 from models import User
 from flask_bcrypt import check_password_hash
 
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     if request.method == 'POST':
-#         # Retrieve username and password from the login form
-#         username = request.form['username']
-#         password = request.form['password']
-        
-#         # Query the database to find the user by username
-#         user = User.query.filter_by(username=username).first()
-        
-#         # Check if the user exists and the password is correct
-#         if user and check_password_hash(user.password_hash, password):
-#             # If user exists and password is correct, set user as logged in
-#             session['username'] = username  # Store username in session
-#             flash('Logged in successfully!', 'success')
-#             return redirect(url_for('dashboard'))  # Redirect to dashboard or home page
-#         else:
-#             # If user doesn't exist or password is incorrect, show error message
-#             flash('Invalid username or password', 'error')
 
-#     # Render the login form template
-#     return render_template('/users/login.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -116,23 +95,6 @@ def logout():
 #=============================== ^^^^^ Login/register ^^^^^ ==========================
 
 
-# @app.route('/dashboard')
-# def dashboard():
-#     # Check if the user is logged in
-#     if 'username' in session:
-#         # Get the username from the session
-#         username = session['username']
-        
-#         # Query the database to get the user's email
-#         user = User.query.filter_by(username=username).first()
-#         email = user.email if user else None
-        
-#         # Render the dashboard template with the username and email
-#         return render_template('/users/dashboard.html', username=username, email=email)
-#     else:
-#         # If the user is not logged in, redirect to the login page
-#         flash('Please log in to access the dashboard.', 'error')
-#         return redirect(url_for('login'))
 @app.route('/dashboard')
 def dashboard():
     # Check if the user is logged in
@@ -224,7 +186,7 @@ def bitcoin_buy():
         bitcoin_symbol = None
 
     if request.method == 'POST':
-        # Handle buy operation
+        # Handles the bitcoin buy operation
         bitcoin_amount = request.form['bitcoin_amount']
         total_cost = float(bitcoin_amount) * bitcoin_price
 
@@ -238,7 +200,7 @@ def bitcoin_buy():
             # Save transaction to the database
             new_transaction = TransactionHistory(
                 user_id=user_id,
-                cryptocurrency_id=1,  # Replace with the appropriate cryptocurrency ID
+                cryptocurrency_id=1,  # hard coded due to time limitations, left open for future coins
                 transaction_type='buy',
                 amount=float(bitcoin_amount)
             )
@@ -353,7 +315,20 @@ def money_made():
     return render_template('/users/money_made.html', total_money_made=total_money_made)
 
 
+@app.route('/calculate-staking', methods=['POST'])
+def calculate_staking():
+    # Retrieve the total money made from the form data
+    total_money_made = float(request.form['total_money_made'])
 
+    # Calculate staking returns for 30, 60, and 90 days at 10% interest
+    interest_rate = 0.10
+    periods = [30, 60, 90, 120, 150, 175, 180, 210, 240, 270, 300, 330, 365]
+
+    staking_returns = [(total_money_made * (1 + interest_rate) ** (days / 365)) - total_money_made for days in periods]
+
+  
+
+    return render_template('/users/staking_result.html', staking_returns=staking_returns)
 
 ######################################----- vvvv  my API ROUTES are below vvvv---- ########################################
 @app.route("/api")
@@ -466,6 +441,29 @@ def remove_cryptocurrency(currency_id):
     #     # If an error occurs, rollback changes and return an error response
     #     db.session.rollback()
     #     return jsonify(error=str(e)), 500
+
+
+
+#test zone below
+
+
+
+
+
+
+@app.route('/reset-transactions', methods=['POST'])
+def reset_transactions():
+    # Retrieve the current user's ID from the session
+    user_id = session.get('user_id')
+
+    # Delete all transactions associated with the current user
+    TransactionHistory.query.filter_by(user_id=user_id).delete()
+
+    # Commit the changes to the database
+    db.session.commit()
+
+    # Redirect the user to their dashboard or any other relevant page
+    return redirect(url_for('dashboard'))
 
 
 if __name__ == "__main__":

@@ -8,7 +8,12 @@
     <a href="{{ url_for('logout') }}">Logout</a>
     <a href="{{ url_for('bitcoin_buy') }}">Buy bitcoin</a>
     <a href="{{ url_for('bitcoin_sell') }}">Sell bitcoin</a>
-    <a href="{{ url_for('money_made') }}">Sell bitcoin</a>
+    <a href="{{ url_for('money_made') }}">Money Made From Transactions</a>
+    <a href="{{ url_for('money_made') }}">Money Made From Transactions</a>
+    <form action="/reset-transactions" method="post">
+        <button type="submit">Reset Transactions</button>
+    </form>
+
 
 
 
