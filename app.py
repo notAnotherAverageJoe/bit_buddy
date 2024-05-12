@@ -2,7 +2,7 @@ import bcrypt
 from flask import Flask, render_template, session, redirect, url_for, flash
 from crypto_api import get_bitcoin_data, get_blockchain_info
 from forms import RegistrationForm
-from models import connect_db, db, User
+from models import TransactionHistory, connect_db, db, User
 from flask import Flask
 from models import cryptocurrency, User
 from flask_cors import CORS # type: ignore
@@ -57,6 +57,29 @@ from werkzeug.security import check_password_hash
 from models import User
 from flask_bcrypt import check_password_hash
 
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     if request.method == 'POST':
+#         # Retrieve username and password from the login form
+#         username = request.form['username']
+#         password = request.form['password']
+        
+#         # Query the database to find the user by username
+#         user = User.query.filter_by(username=username).first()
+        
+#         # Check if the user exists and the password is correct
+#         if user and check_password_hash(user.password_hash, password):
+#             # If user exists and password is correct, set user as logged in
+#             session['username'] = username  # Store username in session
+#             flash('Logged in successfully!', 'success')
+#             return redirect(url_for('dashboard'))  # Redirect to dashboard or home page
+#         else:
+#             # If user doesn't exist or password is incorrect, show error message
+#             flash('Invalid username or password', 'error')
+
+#     # Render the login form template
+#     return render_template('/users/login.html')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -69,8 +92,8 @@ def login():
         
         # Check if the user exists and the password is correct
         if user and check_password_hash(user.password_hash, password):
-            # If user exists and password is correct, set user as logged in
-            session['username'] = username  # Store username in session
+            # If user exists and password is correct, set user ID as logged in
+            session['user_id'] = user.id  # Store user ID in session
             flash('Logged in successfully!', 'success')
             return redirect(url_for('dashboard'))  # Redirect to dashboard or home page
         else:
@@ -79,6 +102,7 @@ def login():
 
     # Render the login form template
     return render_template('/users/login.html')
+
 
 
 @app.route('/logout')
@@ -92,23 +116,51 @@ def logout():
 #=============================== ^^^^^ Login/register ^^^^^ ==========================
 
 
+# @app.route('/dashboard')
+# def dashboard():
+#     # Check if the user is logged in
+#     if 'username' in session:
+#         # Get the username from the session
+#         username = session['username']
+        
+#         # Query the database to get the user's email
+#         user = User.query.filter_by(username=username).first()
+#         email = user.email if user else None
+        
+#         # Render the dashboard template with the username and email
+#         return render_template('/users/dashboard.html', username=username, email=email)
+#     else:
+#         # If the user is not logged in, redirect to the login page
+#         flash('Please log in to access the dashboard.', 'error')
+#         return redirect(url_for('login'))
 @app.route('/dashboard')
 def dashboard():
     # Check if the user is logged in
-    if 'username' in session:
-        # Get the username from the session
-        username = session['username']
+    if 'user_id' in session:
+        # Get the user ID from the session
+        user_id = session['user_id']
         
-        # Query the database to get the user's email
-        user = User.query.filter_by(username=username).first()
-        email = user.email if user else None
+        # Query the database to get the user's information
+        user = User.query.get(user_id)
         
-        # Render the dashboard template with the username and email
-        return render_template('/users/dashboard.html', username=username, email=email)
+        # Check if the user exists
+        if user:
+            # Get the username and email from the user object
+            username = user.username
+            email = user.email
+            
+            # Render the dashboard template with the user's information
+            return render_template('/users/dashboard.html', username=username, email=email)
+        else:
+            # If the user does not exist, log them out and redirect to the login page
+            flash('User not found. Please log in again.', 'error')
+            session.pop('user_id', None)
+            return redirect(url_for('login'))
     else:
         # If the user is not logged in, redirect to the login page
         flash('Please log in to access the dashboard.', 'error')
         return redirect(url_for('login'))
+
 
 ####################################----- vvvv market cap api calls are below vvvv ----- ###############################
 
@@ -152,6 +204,102 @@ def blockchain():
     return render_template('/crypto_api/blockchaininfo.html', block_height=block_height, time=time, block_hash=block_hash)
 
 ####################################----- ^^^^ market cap api calls are above ^^^^ ----- ###############################
+
+def get_user_id():
+    # Implement this function to retrieve the user's ID from the session
+    return session.get('user_id')
+@app.route('/bitcoinbuy', methods=['GET', 'POST'])
+def bitcoin_buy():
+    # Check if the user is logged in
+    if 'user_id' not in session:
+        # If not logged in, redirect to login page
+        return redirect(url_for('login'))
+
+    bitcoin_data = get_bitcoin_data()
+    if bitcoin_data:
+        bitcoin_price = bitcoin_data['quote']['USD']['price']
+        bitcoin_symbol = bitcoin_data['symbol']
+    else:
+        bitcoin_price = None
+        bitcoin_symbol = None
+
+    if request.method == 'POST':
+        # Handle buy operation
+        bitcoin_amount = request.form['bitcoin_amount']
+        total_cost = float(bitcoin_amount) * bitcoin_price
+
+        # Retrieve the current user's ID from the session
+        user_id = get_user_id()
+
+        # Query the database to find the user by user ID
+        user = User.query.get(user_id)
+
+        if user:
+            # Save transaction to the database
+            new_transaction = TransactionHistory(
+                user_id=user_id,
+                cryptocurrency_id=1,  # Replace with the appropriate cryptocurrency ID
+                transaction_type='buy',
+                amount=float(bitcoin_amount)
+            )
+            db.session.add(new_transaction)
+            db.session.commit()
+
+            buy_confirmation = f'Bought {bitcoin_amount} {bitcoin_symbol} at ${bitcoin_price} each. Total cost: ${total_cost}'
+            return render_template('/users/bitcoin_buy.html', bitcoin_price=bitcoin_price, bitcoin_symbol=bitcoin_symbol, buy_confirmation=buy_confirmation)
+        else:
+            # Handle the case where the user does not exist
+            return "User does not exist"
+    else:
+        return render_template('/users/bitcoin_buy.html', bitcoin_price=bitcoin_price, bitcoin_symbol=bitcoin_symbol)
+
+
+
+
+@app.route('/bitcoinsell', methods=['GET', 'POST'])
+def bitcoin_sell():
+    # Check if the user is logged in
+    if 'user_id' not in session:
+        # If not logged in, redirect to login page
+        return redirect(url_for('login'))
+
+    bitcoin_data = get_bitcoin_data()
+    if bitcoin_data:
+        bitcoin_price = bitcoin_data['quote']['USD']['price']
+        bitcoin_symbol = bitcoin_data['symbol']
+    else:
+        bitcoin_price = None
+        bitcoin_symbol = None
+
+    if request.method == 'POST':
+        # Handle sell operation
+        bitcoin_amount = request.form['bitcoin_amount']
+        total_earning = float(bitcoin_amount) * bitcoin_price
+
+        # Retrieve the current user's ID from the session
+        user_id = get_user_id()
+
+        # Query the database to find the user by user ID
+        user = User.query.get(user_id)
+
+        if user:
+            # Save transaction to the database
+            new_transaction = TransactionHistory(
+                user_id=user_id,
+                cryptocurrency_id=1,  # Replace with the appropriate cryptocurrency ID
+                transaction_type='sell',
+                amount=float(bitcoin_amount)
+            )
+            db.session.add(new_transaction)
+            db.session.commit()
+
+            sell_confirmation = f'Sold {bitcoin_amount} {bitcoin_symbol} at ${bitcoin_price} each. Total earning: ${total_earning}'
+            return render_template('/users/bitcoin_sell.html', bitcoin_price=bitcoin_price, bitcoin_symbol=bitcoin_symbol, sell_confirmation=sell_confirmation)
+        else:
+            # Handle the case where the user does not exist
+            return "User does not exist"
+    else:
+        return render_template('/users/bitcoin_sell.html', bitcoin_price=bitcoin_price, bitcoin_symbol=bitcoin_symbol)
 
 
 ######################################----- vvvv  my API ROUTES are below vvvv---- ########################################

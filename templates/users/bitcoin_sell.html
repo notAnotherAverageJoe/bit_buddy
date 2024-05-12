@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin Sell</title>
+</head>
+<body>
+    <h1>Bitcoin Sell</h1>
+    {% if bitcoin_price %}
+        <p>Current Bitcoin Price: ${{ bitcoin_price }}</p>
+    {% endif %}
+    {% if bitcoin_symbol %}
+        <p>Bitcoin Symbol: {{ bitcoin_symbol }}</p>
+    {% endif %}
+    <form action="/bitcoinsell" method="POST">
+        <label for="bitcoin_amount">Bitcoin Amount:</label>
+        <input type="text" id="bitcoin_amount" name="bitcoin_amount">
+        <button type="submit">Sell Bitcoin</button>
+    </form>
+    {% if sell_confirmation %}
+        <p>{{ sell_confirmation }}</p>
+    {% endif %}
+</body>
+</html>

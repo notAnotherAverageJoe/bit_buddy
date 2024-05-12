@@ -1,28 +1,23 @@
-
 -- Create the database "bitbuddy"
 CREATE DATABASE bitbuddy;
 
 -- Connect to the "bitbuddy" database
 \c bitbuddy;
 
-
-
-
-
 -- Create the "User" table
 CREATE TABLE "User" (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
+    username VARCHAR(30) NOT NULL UNIQUE,
+    email VARCHAR(150) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL
 );
 
 -- Create the "CryptoCurrency" table if it doesn't already exist
 CREATE TABLE IF NOT EXISTS CryptoCurrency (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    symbol VARCHAR(10) NOT NULL,
-    descriptions VARCHAR(255) NOT NULL
+    name VARCHAR(30) NOT NULL,
+    symbol VARCHAR(5) NOT NULL,
+    descriptions VARCHAR(100) NOT NULL
 );
 
 -- Insert data into the "User" table
@@ -56,3 +51,20 @@ INSERT INTO TransactionHistory (user_id, cryptocurrency_id, transaction_type, am
 (2, 1, 'buy', 0.8),
 (3, 3, 'sell', 5.0);
 
+-- Create the trigger function
+CREATE OR REPLACE FUNCTION prevent_delete_bitcoin()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Check if the record being deleted corresponds to Bitcoin (id = 1)
+    IF OLD.id = 1 THEN
+        RAISE EXCEPTION 'Bitcoin entry cannot be deleted.';
+    END IF;
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Create the trigger
+CREATE TRIGGER prevent_delete_bitcoin_trigger
+BEFORE DELETE ON CryptoCurrency
+FOR EACH ROW
+EXECUTE FUNCTION prevent_delete_bitcoin();

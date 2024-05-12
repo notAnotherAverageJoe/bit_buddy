@@ -4,3 +4,46 @@
 
 
  export COINMARKETCAP_API_KEY="83359cfc-fe02-4a59-8e98-89d640bbadf9"
+
+
+ code to stop my bitcoin from deletion
+
+ -- Step 1: Create Trigger Function
+CREATE OR REPLACE FUNCTION prevent_delete_bitcoin()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Check if the record being deleted corresponds to Bitcoin (id = 1)
+    IF OLD.id = 1 THEN
+        RAISE EXCEPTION 'Bitcoin entry cannot be deleted.';
+    END IF;
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Step 2: Create Trigger
+CREATE TRIGGER prevent_delete_bitcoin_trigger
+BEFORE DELETE ON cryptocurrency
+FOR EACH ROW
+EXECUTE FUNCTION prevent_delete_bitcoin();
+
+
+
+
+this stops bitcoin from updates
+-- Step 1: Modify Trigger Function to Handle Updates
+CREATE OR REPLACE FUNCTION prevent_update_bitcoin()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Check if the record being updated corresponds to Bitcoin (id = 1)
+    IF NEW.id = 1 THEN
+        RAISE EXCEPTION 'Bitcoin entry cannot be updated.';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Step 2: Create Trigger for Updates
+CREATE TRIGGER prevent_update_bitcoin_trigger
+BEFORE UPDATE ON cryptocurrency
+FOR EACH ROW
+EXECUTE FUNCTION prevent_update_bitcoin();

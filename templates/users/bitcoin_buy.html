@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+
+    <title>Bitcoin Buy</title>
+</head>
+<body>
+    <h1>Bitcoin Buy</h1>
+    <img id="twocoins" src="https://cdn.pixabay.com/photo/2018/03/15/11/29/bitcoin-3227945_1280.png">
+    {% if bitcoin_price %}
+        <p>Current Bitcoin Price: ${{ bitcoin_price }}</p>
+    {% endif %}
+    {% if bitcoin_symbol %}
+        <p>Bitcoin Symbol: {{ bitcoin_symbol }}</p>
+    {% endif %}
+    <form action="{{ url_for('bitcoin_buy') }}" method="POST">
+
+        <label for="bitcoin_amount">Bitcoin Amount:</label>
+        <input type="text" id="bitcoin_amount" name="bitcoin_amount">
+        <button type="submit">Buy Bitcoin</button>
+    </form>
+    {% if buy_confirmation %}
+        <p>{{ buy_confirmation }}</p>
+    {% endif %}
+</body>
+</html>
