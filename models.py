@@ -10,7 +10,7 @@ db = SQLAlchemy(app)
 
 
 class User(db.Model):
-    __tablename__ = 'User'
+    __tablename__ = "User"
     
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(255), nullable=False)
