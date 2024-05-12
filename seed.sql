@@ -68,3 +68,21 @@ CREATE TRIGGER prevent_delete_bitcoin_trigger
 BEFORE DELETE ON CryptoCurrency
 FOR EACH ROW
 EXECUTE FUNCTION prevent_delete_bitcoin();
+
+
+CREATE OR REPLACE FUNCTION prevent_update_bitcoin()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Check if the record being updated corresponds to Bitcoin (id = 1)
+    IF NEW.id = 1 THEN
+        RAISE EXCEPTION 'Bitcoin entry cannot be updated.';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Step 2: Create Trigger for Updates
+CREATE TRIGGER prevent_update_bitcoin_trigger
+BEFORE UPDATE ON cryptocurrency
+FOR EACH ROW
+EXECUTE FUNCTION prevent_update_bitcoin();

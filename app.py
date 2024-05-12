@@ -302,6 +302,59 @@ def bitcoin_sell():
         return render_template('/users/bitcoin_sell.html', bitcoin_price=bitcoin_price, bitcoin_symbol=bitcoin_symbol)
 
 
+
+from decimal import Decimal
+
+
+@app.route('/money-made')
+def money_made():
+    # Function to get the current price of Bitcoin
+    def get_bitcoin_price():
+        bitcoin_data = get_bitcoin_data()
+        if bitcoin_data:
+            bitcoin_price = bitcoin_data['quote']['USD']['price']
+            return bitcoin_price
+        else:
+            return None
+
+    # Define a function to retrieve the current user's ID from the session
+    def get_user_id():
+        # Implement this function to retrieve the user's ID from the session
+        return session.get('user_id')
+
+    # Query transactions associated with the current user's ID
+    transactions = TransactionHistory.query.filter_by(user_id=get_user_id()).all()
+
+    total_money_made = 0
+
+    # Iterate through each transaction and calculate the total value
+    for transaction in transactions:
+        # Get the current price of Bitcoin
+        bitcoin_price = get_bitcoin_price()
+        
+        if bitcoin_price is not None:
+            # Convert bitcoin_price to a Decimal object
+            bitcoin_price_decimal = Decimal(str(bitcoin_price))
+
+            # Get the cryptocurrency associated with the transaction
+            cryptocurrency_made = cryptocurrency.query.get(transaction.cryptocurrency_id)
+            
+            # Calculate the total value of the transaction
+            total_value = transaction.amount * bitcoin_price_decimal
+            
+            # Adjust total_money_made based on transaction type
+            if transaction.transaction_type == 'buy':
+                total_money_made -= total_value
+            elif transaction.transaction_type == 'sell':
+                total_money_made += total_value
+
+            print(f"Transaction ID: {transaction.id}, Amount: {transaction.amount}, Total Value: ${total_value:.2f}")
+
+    return render_template('/users/money_made.html', total_money_made=total_money_made)
+
+
+
+
 ######################################----- vvvv  my API ROUTES are below vvvv---- ########################################
 @app.route("/api")
 def api():
