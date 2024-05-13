@@ -1,31 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Your head content -->
-</head>
-<body>
-    <h1>Staking Results</h1>
+{% extends "base.html" %}
 
-    <div>
-        {% for days, returns in staking_returns.items() %}
-            <p>Staking Returns for {{ days }} days: ${{ returns }}</p>
-        {% endfor %}
+{% block content %}
+    <div class="container">
+        <h1 class="text-center mt-5 mb-4">Staking Results</h1>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <ul class="list-group">
+                    {% for days, returns in staking_returns.items() %}
+                        <li class="list-group-item">Staking Returns for {{ days }} days: ${{ returns }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-        
-
-
-
-    </div>
-</body>
-</html>
+{% endblock %}

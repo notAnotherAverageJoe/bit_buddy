@@ -36,6 +36,13 @@ def home():
     return render_template("home.html")
 
 
+@app.route("/about")
+def about():
+    """About page"""
+    return render_template("about.html")
+
+
+
 
 
 #===============================Login/register ==========================
@@ -86,8 +93,8 @@ def login():
 
 @app.route('/logout')
 def logout():
-    # Remove username from session to log out the user
-    session.pop('username', None)
+    # Remove user_id from session to log out the user
+    session.pop('user_id', None)
     flash('You have been logged out', 'success')
     return redirect(url_for('login'))
 
@@ -167,6 +174,8 @@ def blockchain():
 
 ####################################----- ^^^^ market cap api calls are above ^^^^ ----- ###############################
 
+
+####################################----- vvvv User buy,sell,stake vvvv ----####################
 def get_user_id():
     # Implement this function to retrieve the user's ID from the session
     return session.get('user_id')
@@ -304,13 +313,13 @@ def money_made():
 
             # Adjust total_money_made based on transaction type
             if transaction.transaction_type == 'buy':
-                total_money_made -= total_value
-            elif transaction.transaction_type == 'sell':
                 total_money_made += total_value
+            elif transaction.transaction_type == 'sell':
+                total_money_made -= total_value
 
             print(f"Transaction ID: {transaction.id}, Amount: {transaction.amount}, Total Value: ${total_value:.2f}")
 
-    return render_template('/users/money_made.html', total_money_made=total_money_made)
+    return render_template('/users/bitcoin_values.html', total_money_made=total_money_made)
 
 
 
@@ -337,10 +346,36 @@ def calculate_staking():
         return "Method Not Allowed", 405  # Method Not Allowed status code
 
 
+@app.route('/transaction-history')
+def transaction_history():
+    # Retrieve the current user's ID (you need to implement this function)
+    user_id = get_user_id()
+
+    # Query transaction history for the current user
+    user_transactions = TransactionHistory.query.filter_by(user_id=user_id).all()
+
+    return render_template('/users/transaction_history.html', transactions=user_transactions)
+
+
+
+@app.route('/reset-transactions', methods=['POST'])
+def reset_transactions():
+    # Retrieve the current user's ID from the session
+    user_id = session.get('user_id')
+
+    # Delete all transactions associated with the current user
+    TransactionHistory.query.filter_by(user_id=user_id).delete()
+
+    # Commit the changes to the database
+    db.session.commit()
+
+    # Redirect the user to their dashboard or any other relevant page
+    return redirect(url_for('dashboard'))
 
 
 
 
+####################################----- ^^^^^ User buy,sell,stake ^^^^^ ----####################
 
 
 ######################################----- vvvv  my API ROUTES are below vvvv---- ########################################
@@ -433,29 +468,23 @@ from models import db, cryptocurrency
 def remove_cryptocurrency(currency_id):
     """Delete cryptocurrency and return confirmation message."""
 
-    # try:
-        # Print or log the parameter value to verify it
+   
     print("Cryptocurrency ID:", currency_id)
 
-        # Query the database for the cryptocurrency with the given ID
+    # Query the database for the cryptocurrency with the given ID
     cryptocurrency_delete = cryptocurrency.query.get_or_404(currency_id)
 
-        # Log the generated SQL query
+    # Log the generated SQL query
     print("SQL Query:", db.session.query(cryptocurrency).filter_by(id=currency_id).statement)
 
-        # Delete the cryptocurrency from the database
+    # Delete the cryptocurrency from the database
     db.session.delete(cryptocurrency_delete)
     db.session.commit()
 
-        # Return a JSON confirmation message
+    # Return a JSON confirmation message
     return jsonify(message="Cryptocurrency deleted")
 
-    # except Exception as e:
-    #     # If an error occurs, rollback changes and return an error response
-    #     db.session.rollback()
-    #     return jsonify(error=str(e)), 500
-
-
+   
 
 #test zone below
 
@@ -463,20 +492,6 @@ def remove_cryptocurrency(currency_id):
 
 
 
-
-@app.route('/reset-transactions', methods=['POST'])
-def reset_transactions():
-    # Retrieve the current user's ID from the session
-    user_id = session.get('user_id')
-
-    # Delete all transactions associated with the current user
-    TransactionHistory.query.filter_by(user_id=user_id).delete()
-
-    # Commit the changes to the database
-    db.session.commit()
-
-    # Redirect the user to their dashboard or any other relevant page
-    return redirect(url_for('dashboard'))
 
 
 if __name__ == "__main__":

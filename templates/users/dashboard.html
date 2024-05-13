@@ -10,7 +10,9 @@
             <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary me-3">Logout</a>
             <a href="{{ url_for('bitcoin_buy') }}" class="btn btn-teal btn-outline-primary me-3">Buy Bitcoin</a>
             <a href="{{ url_for('bitcoin_sell') }}" class="btn btn-teal btn-outline-primary me-3">Sell Bitcoin</a>
-            <a href="{{ url_for('money_made') }}" class="btn btn-teal btn-outline-primary me-3">Money Made From Transactions</a>
+            <a href="{{ url_for('money_made') }}" class="btn btn-teal btn-outline-primary me-3">Your Bitcoin value</a>
+            <a href="{{ url_for('transaction_history') }}" class="btn btn-teal btn-outline-primary me-3">Transaction History</a>
+
         </div>
         <div class="text-center mt-3">
             <form action="/reset-transactions" method="post">

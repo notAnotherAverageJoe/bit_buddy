@@ -5,7 +5,8 @@ nav {
 
 
 body {
-    font-family: 'Teko', sans-serif; /* Apply Teko font to the entire body */
+    font-family: 'Teko', sans-serif; 
+    font-size: 22px;
 }
 
 
@@ -31,7 +32,7 @@ body {
 }
 
 .btn-primary:hover {
-    background-color: #ffa500; /* Orange color on hover */
+    background-color: #ffa500; 
     border-color: #ffa500;
 }
 
@@ -39,17 +40,16 @@ body {
 /* style.css */
 
 .btn-teal {
-    background-color: aqua; /* Adjust this color to your desired teal color */
-    color: #000000; /* Text color */
+    background-color: aqua; 
+    color: #000000; 
 }
 
 .btn-orange {
-    background-color: #eda200; /* Orange color */
-    color: #ffffff; /* Text color */
+    background-color: #eda200; 
+    color: #ffffff; 
 }
 
 .btn-teal:hover,
 .btn-orange:hover {
-    background-color: #ffa500; /* Change to orange color on hover */
-    color: #ffffff; /* Text color */
+    background-color: #ffa500; 
 }

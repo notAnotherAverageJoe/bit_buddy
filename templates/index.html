@@ -1,45 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Cryptocurrencies</title>
-  <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
+{% extends "base.html" %}
 
-<h1>Thank you for stopping by! We hope you learned a lot about the awesome world of cryptocurrencies!</h1>
-<h2>Be sure to Commemorate the moment and make an honorary cryptocoin!</h2>
+{% block content %}
+    <style>
+        /* Add your custom CSS styling here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
 
-<ul id="cryptocurrencies-list">
-</ul>
+        h1 {
+            font-size: 24px;
+            color: #eda200;
+            margin-bottom: 20px;
+        }
 
-<h2>Add a new cryptocurrency!</h2>
+        h2 {
+            font-size: 20px;
+            color: #eda200;
+            margin-bottom: 10px;
+        }
 
-<form id="new-cryptocurrency-form">
-  <div>
-    <label for="form-name">Name: </label>
-    <input name="name" id="form-name">
-  </div>
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
 
-  <div>
-    <label for="form-symbol">Symbol: </label>
-    <input name="symbol" id="form-symbol">
-  </div>
+        input {
+            padding: 5px;
+            margin-bottom: 10px;
+            width: 200px;
+        }
 
-  <div>
-    <label for="form-descriptions">Description: </label>
-    <input name="descriptions" id="form-descriptions">
-</div>
+        button {
+            padding: 8px 16px;
+            background-color: aqua;
+            color: #000000;
+            border: none;
+            cursor: pointer;
+            
+        }
 
+        button:hover {
+            background-color: #eda200;
+            color:#f0f0f0
+        }
 
-  <button>Add!</button>
-</form>
+        #cryptocurrencies-list {
+            list-style: none;
+            padding: 0;
+        }
 
-<script src="https://unpkg.com/jquery"></script>
-<script src="https://unpkg.com/axios/dist/axios.js"></script>
-<script src="/static/cryptocurrencies.js"></script>
+        #cryptocurrencies-list li {
+            margin-bottom: 10px;
+        }
+    </style>
 
-</body>
-</html>
+    <h1>Thank you for stopping by! We hope you learned a lot about the awesome world of cryptocurrencies!</h1>
+    <h2>Be sure to Commemorate the moment and make an honorary cryptocoin!</h2>
+
+    <ul id="cryptocurrencies-list">
+    </ul>
+
+    <h2>Add a new cryptocurrency!</h2>
+
+    <form id="new-cryptocurrency-form">
+        <div>
+            <label for="form-name">Name: </label>
+            <input name="name" id="form-name">
+        </div>
+
+        <div>
+            <label for="form-symbol">Symbol: </label>
+            <input name="symbol" id="form-symbol">
+        </div>
+
+        <div>
+            <label for="form-descriptions">Description: </label>
+            <input name="descriptions" id="form-descriptions">
+        </div>
+
+        <button>Add!</button>
+    </form>
+
+    <script src="https://unpkg.com/jquery"></script>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+    <script src="/static/cryptocurrencies.js"></script>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Bitcoin Wallet</h1>
+    <div class="card">
+        <div class="card-body">
+            <p class="card-text">Total amount of money your Bitcoins are worth: ${{ total_money_made }}</p>
+            <form action="/calculate-staking" method="post">
+                <input type="hidden" name="total_money_made" value="{{ total_money_made }}">
+                <button type="submit" class="btn btn-primary">Calculate Staking</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
