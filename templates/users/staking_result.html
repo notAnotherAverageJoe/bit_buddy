@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
+    <!-- Your head content -->
 </head>
 <body>
     <h1>Staking Results</h1>
 
     <div>
-        <p>Staking Returns for 30 days: ${{ staking_returns[0] }}</p>
-        <p>Staking Returns for 60 days: ${{ staking_returns[1] }}</p>
-        <p>Staking Returns for 90 days: ${{ staking_returns[2] }}</p>
-        <p>Staking Returns for 120 days: ${{ staking_returns[3] }}</p>
-        <p>Staking Returns for 150 days: ${{ staking_returns[4] }}</p>
-        <p>Staking Returns for 175 days: ${{ staking_returns[5] }}</p>
-        <p>Staking Returns for 180 days: ${{ staking_returns[6] }}</p>
-        <p>Staking Returns for 210 days: ${{ staking_returns[7] }}</p>
-        <p>Staking Returns for 240 days: ${{ staking_returns[8] }}</p>
-        <p>Staking Returns for 270 days: ${{ staking_returns[9] }}</p>
-        <p>Staking Returns for 300 days: ${{ staking_returns[10] }}</p>
-        <p>Staking Returns for 330 days: ${{ staking_returns[11] }}</p>
-        <p>Staking Returns for 365 days: ${{ staking_returns[12] }}</p>
+        {% for days, returns in staking_returns.items() %}
+            <p>Staking Returns for {{ days }} days: ${{ returns }}</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
+
 
 
 

@@ -47,3 +47,20 @@ CREATE TRIGGER prevent_update_bitcoin_trigger
 BEFORE UPDATE ON cryptocurrency
 FOR EACH ROW
 EXECUTE FUNCTION prevent_update_bitcoin();
+
+
+
+emojis
+
+
+💰 💸 🪙 💲 🏦 💵 🌟 📈 🚀 🔥
+ 🌕 📉 💳 💎 💵 🔄 📊 📈 📉 🤑
+  💹 💱 🏧 💳 🏦 
+  
+
+
+  💱
+
+  💱
+
+  

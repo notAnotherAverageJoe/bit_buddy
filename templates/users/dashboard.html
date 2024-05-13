@@ -3,18 +3,19 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-    <h1>Welcome to the Dashboard, {{ username }}</h1>
-    <p>Your email: {{ email }}</p>
-    <a href="{{ url_for('logout') }}">Logout</a>
-    <a href="{{ url_for('bitcoin_buy') }}">Buy bitcoin</a>
-    <a href="{{ url_for('bitcoin_sell') }}">Sell bitcoin</a>
-    <a href="{{ url_for('money_made') }}">Money Made From Transactions</a>
-    <a href="{{ url_for('money_made') }}">Money Made From Transactions</a>
-    <form action="/reset-transactions" method="post">
-        <button type="submit">Reset Transactions</button>
-    </form>
-
-
-
-
+    <div class="container">
+        <h1 class="text-center mt-5">Welcome to the Dashboard, {{ username }}</h1>
+        <p class="text-center">Your email: {{ email }}</p>
+        <div class="text-center mt-3">
+            <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary me-3">Logout</a>
+            <a href="{{ url_for('bitcoin_buy') }}" class="btn btn-teal btn-outline-primary me-3">Buy Bitcoin</a>
+            <a href="{{ url_for('bitcoin_sell') }}" class="btn btn-teal btn-outline-primary me-3">Sell Bitcoin</a>
+            <a href="{{ url_for('money_made') }}" class="btn btn-teal btn-outline-primary me-3">Money Made From Transactions</a>
+        </div>
+        <div class="text-center mt-3">
+            <form action="/reset-transactions" method="post">
+                <button type="submit" class="btn btn-orange">Reset Transactions</button>
+            </form>
+        </div>
+    </div>
 {% endblock %}

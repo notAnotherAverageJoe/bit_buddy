@@ -8,10 +8,10 @@
     <p>Total amount of money made with Bitcoin transactions: ${{ total_money_made }}</p>
 
     <form action="/calculate-staking" method="post">
-        <!-- Add a hidden input field to include total_money_made in the form -->
         <input type="hidden" name="total_money_made" value="{{ total_money_made }}">
         <button type="submit">Calculate Staking</button>
     </form>
+    
 </body>
 </html>
 
@@ -22,20 +22,4 @@
 
 
 
-
-
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Total Money Made</title>
-</head>
-<body>
-    <h1>Total Money Made</h1>
-    <p>Total amount of money made with Bitcoin transactions: ${{ total_money_made }}</p>
-</body>
-</html> -->
 

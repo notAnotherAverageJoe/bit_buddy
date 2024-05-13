@@ -2,7 +2,54 @@ nav {
     background-color: aqua;
 }
 
+
+
+body {
+    font-family: 'Teko', sans-serif; /* Apply Teko font to the entire body */
+}
+
+
 #twocoin {
     width: 100px; 
     height: 100px; 
+}
+
+.nav-link {
+    font-size: 22px;
+}
+
+
+
+.navbar-brand {
+    font-size: 22px;
+}
+ 
+
+.btn-primary {
+    background-color: #eda200;
+    border-color: #eda200;
+}
+
+.btn-primary:hover {
+    background-color: #ffa500; /* Orange color on hover */
+    border-color: #ffa500;
+}
+
+
+/* style.css */
+
+.btn-teal {
+    background-color: aqua; /* Adjust this color to your desired teal color */
+    color: #000000; /* Text color */
+}
+
+.btn-orange {
+    background-color: #eda200; /* Orange color */
+    color: #ffffff; /* Text color */
+}
+
+.btn-teal:hover,
+.btn-orange:hover {
+    background-color: #ffa500; /* Change to orange color on hover */
+    color: #ffffff; /* Text color */
 }

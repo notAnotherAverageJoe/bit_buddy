@@ -264,9 +264,7 @@ def bitcoin_sell():
         return render_template('/users/bitcoin_sell.html', bitcoin_price=bitcoin_price, bitcoin_symbol=bitcoin_symbol)
 
 
-
 from decimal import Decimal
-
 
 @app.route('/money-made')
 def money_made():
@@ -301,9 +299,9 @@ def money_made():
             # Get the cryptocurrency associated with the transaction
             cryptocurrency_made = cryptocurrency.query.get(transaction.cryptocurrency_id)
             
-            # Calculate the total value of the transaction
+                # Now perform the multiplication
             total_value = transaction.amount * bitcoin_price_decimal
-            
+
             # Adjust total_money_made based on transaction type
             if transaction.transaction_type == 'buy':
                 total_money_made -= total_value
@@ -315,20 +313,35 @@ def money_made():
     return render_template('/users/money_made.html', total_money_made=total_money_made)
 
 
+
+from flask import request
+
 @app.route('/calculate-staking', methods=['POST'])
 def calculate_staking():
-    # Retrieve the total money made from the form data
-    total_money_made = float(request.form['total_money_made'])
+    if request.method == 'POST':
+        # Retrieve the total money made from the form data
+        total_money_made = float(request.form['total_money_made'])
 
-    # Calculate staking returns for 30, 60, and 90 days at 10% interest
-    interest_rate = 0.10
-    periods = [30, 60, 90, 120, 150, 175, 180, 210, 240, 270, 300, 330, 365]
+        # Calculate staking returns for different periods at 10% interest
+        interest_rate = 0.10
+        periods = [30, 60, 90, 120, 150, 175, 180, 210, 240, 270, 300, 330, 365]
 
-    staking_returns = [(total_money_made * (1 + interest_rate) ** (days / 365)) - total_money_made for days in periods]
+        # Calculate staking returns for each period and store in a dictionary
+        staking_returns = {}
+        for days in periods:
+            staking_returns[days] = (total_money_made * (1 + interest_rate) ** (days / 365)) - total_money_made
 
-  
+        return render_template('/users/staking_result.html', staking_returns=staking_returns)
+    else:
+        # Handle other HTTP methods if needed
+        return "Method Not Allowed", 405  # Method Not Allowed status code
 
-    return render_template('/users/staking_result.html', staking_returns=staking_returns)
+
+
+
+
+
+
 
 ######################################----- vvvv  my API ROUTES are below vvvv---- ########################################
 @app.route("/api")
