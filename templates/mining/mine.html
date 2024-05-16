@@ -1,48 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Mining Game</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            padding: 50px;
-        }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            display: inline-block;
-        }
-        input {
-            font-size: 20px;
-            padding: 10px;
-            margin: 10px;
-        }
-        button {
-            font-size: 20px;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-        .message {
-            margin-top: 20px;
-            font-size: 18px;
-        }
-    </style>
-</head>
-<body>
+{% extends "base.html" %}
+{% set show_navbar = True %}
+
+{% block title %}
+    Crypto Mining Game
+{% endblock %}
+
+{% block content %}
     <div class="container">
         <h1>Welcome to the Crypto Mining Game!</h1>
         <p>Your task is to find the correct nonce to mine a block. Each nonce is a <span id="nonce-length">{{ nonce_length }}</span>-digit number.</p>
+        <p>Type in any sequence of numbers between 0-9, for example: 1234, 5356, 0029, 9850 are all valid attempts!</p>
         <input type="text" id="nonce" maxlength="{{ nonce_length }}">
-        <button onclick="mineBlock()">Submit Nonce</button>
+        <button class="btn-teal"onclick="mineBlock()">Submit Nonce</button>
         <div class="message" id="message"></div>
     </div>
+   
+        <img class="big-img"src="{{ url_for('static', filename='assets/mining 3.png') }}" alt="Mining Image" >
 
+    
     <script>
         function mineBlock() {
             const nonce = document.getElementById('nonce').value;
@@ -69,5 +44,4 @@
             });
         }
     </script>
-</body>
-</html>
+{% endblock %}

@@ -495,10 +495,13 @@ def check_nonce(correct_nonce, user_nonce):
 
 nonce_length = 4  # Difficulty level of the mining process
 correct_nonce = generate_nonce(nonce_length)
+@app.route('/crypto_mining')
+def whats_mining():
+    return render_template('mining/crypto_mine.html')
 
 @app.route('/game')
 def game():
-    return render_template('mining/crypto_mine.html', nonce_length=nonce_length)
+    return render_template('mining/mine.html', nonce_length=nonce_length)
 
 @app.route('/mine', methods=['POST'])
 def mine():
@@ -516,9 +519,5 @@ def mine():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
-
 
 

@@ -6,8 +6,8 @@ function generateCryptocurrencyHTML(cryptocurrency) {
     <div data-cryptocurrency-id=${cryptocurrency.id}>
       <li>
         ${cryptocurrency.name} / ${cryptocurrency.symbol} / ${cryptocurrency.descriptions}
-        <button class="delete-button">X</button>
-        <button class="update-button">Update</button>
+        <button class="delete-button btn-teal">X</button>
+        <button class="update-button btn-teal">Update</button>
       </li>
     </div>
   `;
@@ -55,29 +55,29 @@ $("#cryptocurrencies-list").on("click", ".delete-button", async function (evt) {
 /** Function to generate HTML for updating a cryptocurrency */
 /** Function to generate HTML for updating a cryptocurrency */
 function generateUpdateForm(cryptocurrency) {
-  return `
-    <form class="update-form">
-      <div>
-        <label for="update-name">Name: </label>
-        <input name="name" id="update-name" value="${cryptocurrency.name}">
-      </div>
-
-      <div>
-        <label for="update-symbol">Symbol: </label>
-        <input name="symbol" id="update-symbol" value="${cryptocurrency.symbol}">
-      </div>
-
-      <div>
-        <label for="update-descriptions">Description: </label>
-        <input name="descriptions" id="update-descriptions" value="${cryptocurrency.descriptions}">
-      </div>
-
-      <!-- Submission button for the update form -->
-      <button type="submit" class="submit-button">Submit</button>
-    </form>
-  `;
-}
-
+    return `
+      <form class="update-form">
+        <div class="form-row">
+          <label for="update-name">Name: </label>
+          <input name="name" id="update-name" value="${cryptocurrency.name}">
+        </div>
+  
+        <div class="form-row">
+          <label for="update-symbol">Symbol: </label>
+          <input name="symbol" id="update-symbol" value="${cryptocurrency.symbol}">
+        </div>
+  
+        <div class="form-row">
+          <label for="update-descriptions">Description: </label>
+          <input name="descriptions" id="update-descriptions" value="${cryptocurrency.descriptions}">
+        </div>
+  
+        <!-- Submission button for the update form -->
+        <button type="submit" class="submit-button">Submit</button>
+      </form>
+    `;
+  }
+  
 
 /** Handle clicking update: show update form */
 $("#cryptocurrencies-list").on("click", ".update-button", async function (evt) {

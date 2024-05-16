@@ -16,13 +16,6 @@ nav {
 }
 
 
-/* 
-.nav-link {
-    font-size: 22px;
-}
- */
-
-
 .navbar-brand {
     font-size: 22px;
 }
@@ -107,4 +100,29 @@ strong {
     box-shadow: 0 0 10px orange;
     padding: 10px 20px;
     border-radius: 5px;
+}
+
+.big-img {
+    width: 40%;
+    border: 8px solid;
+    border-image: linear-gradient(to right, aqua, orange);
+    border-image-slice: 1;
+    margin-top: 20px;
+    margin-left: 20px;
+    box-shadow: 0 0 30px aqua, 0 0 30px orange; /* Added box-shadow */
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-row label {
+    min-width: 100px;
+    margin-right: 10px;
+}
+
+.form-row input {
+    flex: 1;
 }

@@ -12,6 +12,17 @@
             <a href="{{ url_for('bitcoin_sell') }}" class="btn btn-teal btn-outline-primary me-3">Sell Bitcoin</a>
             <a href="{{ url_for('money_made') }}" class="btn btn-teal btn-outline-primary me-3">Your Bitcoin value & Staking</a>
             <a href="{{ url_for('transaction_history') }}" class="btn btn-teal btn-outline-primary me-3">Transaction History</a>
+            <a href="{{ url_for('game') }}" class="btn btn-teal btn-outline-primary me-3">Transaction History</a>
+            <div class="text-center mt-3">
+                <form action="{{ url_for('game') }}" method="get">
+                    <button type="submit" class="btn btn-primary">Start Mining</button>
+                </form>
+            </div>
+            <div class="image-container">
+                <img src="{{ url_for('static', filename='assets/Designer (4).png') }}" alt="More Image" style="margin-top: 15px;">
+            </div>
+            
+
 
         </div>
         <div class="text-center mt-3">

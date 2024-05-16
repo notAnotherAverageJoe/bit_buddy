@@ -6,24 +6,24 @@
 {% block content %}
     <div style="text-align: center; padding: 50px;">
         <h1>What is Crypto Mining?</h1>
-        <p style="text-align: left; margin: 20px 50px; color: #eda200;">
+        <p class="information-text">
             Cryptocurrency mining is the process by which new digital coins or tokens are created and transactions are added to a blockchain. It is a crucial aspect of maintaining and securing decentralized networks. Here's how it works and why it's important:
         </p>
 
-        <h2 style="color: aqua;">How Does Crypto Mining Work?</h2>
-        <p style="text-align: left; margin: 20px 50px; color: #eda200;">
+        <h2>How Does Crypto Mining Work?</h2>
+        <p class="information-text">
             At its core, crypto mining involves solving complex mathematical puzzles. Miners use powerful computers to perform calculations required to verify transactions on the blockchain. When a transaction is made, it is grouped with other transactions into a block. This block must then be verified and added to the blockchain.
         </p>
         
-        <h2 style="color: aqua;">The Role of Nonces</h2>
-        <p style="text-align: left; margin: 20px 50px; color: #eda200;">
+        <h2>The Role of Nonces</h2>
+        <p class="information-text">
             A nonce, short for "number only used once," is a random number that miners add to the block they are attempting to verify. The goal is to find a nonce that, when combined with the data in the block, produces a hash with a specific number of leading zeros. This process is called "proof of work." The first miner to find a valid nonce gets to add the block to the blockchain and is rewarded with cryptocurrency.
         </p>
 
         <h2 style="color: aqua;">Why is Crypto Mining Important?</h2>
-        <p style="text-align: left; margin: 20px 50px; color: #eda200;">
+        <p class="information-text">
             Crypto mining is essential for several reasons:
-            <ul style="text-align: left; margin: 20px 70px; color: #eda200;">
+            <ul class="information-text">
                 <li><strong>Transaction Validation:</strong> Miners validate transactions and add them to the blockchain, ensuring the integrity and security of the network.</li>
                 <li><strong>Decentralization:</strong> Mining enables decentralized control, preventing any single entity from controlling the entire network.</li>
                 <li><strong>New Coin Creation:</strong> Mining is the process through which new coins are introduced into circulation, providing incentives for miners to maintain the network.</li>
@@ -31,13 +31,23 @@
             </ul>
         </p>
         
-        <h2 style="color: aqua;">Challenges of Crypto Mining</h2>
-        <p style="text-align: left; margin: 20px 50px; color: #eda200;">
+        <h2">Challenges of Crypto Mining</h2>
+        <p class="information-text">
             While crypto mining is vital for the functioning of blockchain networks, it comes with challenges:
-            <ul style="text-align: left; margin: 20px 70px; color: #eda200;">
+            <ul class="information-text">
                 <li><strong>Energy Consumption:</strong> Mining requires a significant amount of computational power and electricity, leading to environmental concerns.</li>
                 <li><strong>Complexity:</strong> As more miners join the network, the difficulty of the puzzles increases, requiring more advanced and expensive hardware.</li>
                 <li><strong>Centralization Risk:</strong> Large mining operations can dominate the network, potentially leading to centralization.</li>
             </ul>
         </p>
+
+        <!-- Button to open the game -->
+        <h2>Welcome to the World of Crypto Mining</h2>
+    <p>Click the button below to start mining:</p>
+    <form action="/game" method="get">
+        <button type="submit" class="btn-primary">Start Mining</button>
+    </form>
+
+
+    </div>
 {% endblock %}
