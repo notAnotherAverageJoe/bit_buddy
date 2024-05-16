@@ -1,9 +1,11 @@
 {% extends "base.html" %}
+{% set show_navbar = False %}
+
 {% block content %}
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">
-                <div class="card mt-5">
+                <div class="card mt-5" style="background-color: aqua; color: black;">
                     <div class="card-body">
                         <h2 class="text-center mb-4">Login</h2>
                         {% with messages = get_flashed_messages() %}
@@ -30,6 +32,9 @@
                                 <button type="submit" class="btn btn-primary btn-pill">Login</button>
                             </div>
                         </form>
+                        <div class="mt-3 text-center">
+                            <p>Not a member yet? <a href="{{ url_for('register') }}" class="btn btn-secondary btn-sm">Register here!</a></p>
+                        </div>
                     </div>
                 </div>
             </div>

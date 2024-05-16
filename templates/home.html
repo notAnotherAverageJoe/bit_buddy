@@ -1,18 +1,25 @@
 {% extends "base.html" %}
-
-{% block title %}Bit Buddy - Your Crypto Companion{% endblock %}
+{% set show_navbar = True %}
+{% block title %}Bit Buddy - Your Sci-Fi Crypto Companion{% endblock %}
 
 {% block content %}
-    <div style="text-align: center;">
-        <h1>Welcome to Bit Buddy!</h1>
-        <img src="https://cdn.pixabay.com/photo/2018/02/05/16/21/bitcoin-3132574_1280.jpg" alt="Bitcoin Image" style="width: 50%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-        <p>Your Ultimate Crypto Companion</p>
-        <p>Explore the world of cryptocurrency with Bit Buddy. Whether you're a seasoned investor or just getting started, we've got you covered.</p>
+    <div style="text-align: center;  padding: 50px;">
+        <h1 style="color: #0ff;">Welcome to Bit Buddy!</h1>
+        <p style="color: #0ff; ">The Ultimate Cryptocurrency Companion! Your Crypto journey begins here!</p>
+        <img src="{{ url_for('static', filename='assets/poshome.jpg') }}" alt="Bitcoin Image" style="width: 60%; border: 8px solid #0ff; border-radius: 15px; box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);">
+
+        <p style="color: #0ff; ">Explore the world of cryptocurrency with Bit Buddy. Whether you're a seasoned space traveler or just getting started, we've got you covered.</p>
         <div style="margin-top: 20px;">
-            <a href="{{ url_for('api') }}" style="text-decoration: none; color: #eda200; margin-right: 20px;">Explore API</a>
-            <a href="{{ url_for('register') }}" style="text-decoration: none; color: #eda200; margin-right: 20px;">Join Bit Buddy</a>
-            <a href="{{ url_for('bitcoin') }}" style="text-decoration: none; color: #eda200; margin-right: 20px;">Discover Bitcoin</a>
-            <a href="{{ url_for('blockchain') }}" style="text-decoration: none; color: #eda200;">Explore Blockchain</a>
+            <a href="{{ url_for('api') }}" style="text-decoration: none; font-size: 24px; color: black; 
+            background-color: #eda200; margin-right: 20px;
+             box-shadow: 0 0 10px orange; padding: 10px 20px; 
+             border-radius: 5px;">Explore API</a>
+            <a href="{{ url_for('register') }}" style="text-decoration: none; 
+            font-size: 24px; color: black; background-color: #eda200; margin-right: 20px;
+             box-shadow: 0 0 10px orange; padding: 10px 20px; 
+             border-radius: 5px;">Join Bit Buddy</a>
+
         </div>
     </div>
 {% endblock %}
+

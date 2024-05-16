@@ -1,12 +1,18 @@
 {% extends "base.html" %}
-
+{% set show_navbar = True %}
 {% block content %}
     <h2>Blockchain Information</h2>
-    <div>
-        <p><strong>Block Height:</strong> {{ block_height }}</p>
-        <p><strong>Time:</strong> {{ time }}</p>
-        <p><strong>Block Hash:</strong> {{ block_hash }}</p>
+    <div class="data-container">
+        <div class="text-container">
+            <p><strong>Block Height:</strong> {{ block_height }}</p>
+            <p><strong>Time:</strong> {{ time }}</p>
+            <p><strong>Block Hash:</strong> {{ block_hash }}</p>
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='assets/more 2.png') }}" alt="More Image">
+        </div>
     </div>
+    
     <div style="background-color: aqua; padding: 10px; margin-top: 20px;">
         <h3>What is Blockchain?</h3>
         <p>

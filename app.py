@@ -7,15 +7,11 @@ from flask import Flask
 from models import cryptocurrency, User
 from flask_cors import CORS # type: ignore
 from flask_bcrypt import Bcrypt
-
 bcrypt = Bcrypt()
-
 
 
 app = Flask(__name__)
 CORS(app)
-
-
 
 
 app.config['SECRET_KEY'] = "testingtacos"
@@ -28,21 +24,15 @@ connect_db(app)
 #      db.create_all()
 
 
-
-
 @app.route("/")
 def home():
     """homepage"""
     return render_template("home.html")
 
-
 @app.route("/about")
 def about():
     """About page"""
     return render_template("about.html")
-
-
-
 
 
 #===============================Login/register ==========================
@@ -88,6 +78,9 @@ def login():
 
     # Render the login form template
     return render_template('/users/login.html')
+
+
+
 
 
 

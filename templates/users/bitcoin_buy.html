@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/style.css">
-    <title>Bitcoin Buy</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% set show_navbar = True %}
+{% block content %}
     <div class="container">
         <h1 class="mt-5">Bitcoin Buy</h1>
        
@@ -17,6 +10,8 @@
         {% if bitcoin_symbol %}
             <p>Bitcoin Symbol: {{ bitcoin_symbol }}</p>
         {% endif %}
+        <p>Type in any amount of Bitcoin you wish to buy! For example 1, 2, 3, 4, 5, or use decimals 0.11, 0.00000023</p>
+        <p>This will allow you to buy full Bitcoins or pieces of Bitcoin! Remember this is not a real transaction so have fun with it!</p>
         <form action="{{ url_for('bitcoin_buy') }}" method="POST" class="mt-4">
             <div class="mb-3">
                 <label for="bitcoin_amount" class="form-label">Bitcoin Amount:</label>
@@ -28,5 +23,4 @@
             <p class="mt-3">{{ buy_confirmation }}</p>
         {% endif %}
     </div>
-</body>
-</html>
+{% endblock %}

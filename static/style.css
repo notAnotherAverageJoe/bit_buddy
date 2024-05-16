@@ -6,14 +6,13 @@ nav {
 
 body {
     font-family: 'Teko', sans-serif; 
-    font-size: 22px;
+    font-size: 24px;
+    background-color: #000000;
+    color: whitesmoke;
 }
 
 
-#twocoin {
-    width: 100px; 
-    height: 100px; 
-}
+
 
 .nav-link {
     font-size: 22px;
@@ -37,7 +36,7 @@ body {
 }
 
 
-/* style.css */
+
 
 .btn-teal {
     background-color: aqua; 
@@ -53,3 +52,26 @@ body {
 .btn-orange:hover {
     background-color: #ffa500; 
 }
+
+
+
+.data-container {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+}
+
+.text-container {
+    flex: 1; /* Grow to take up remaining space */
+    margin-right: 20px; /* Add space between text and image */
+}
+
+
+.image-container img {
+    max-width: 270px; 
+    max-height: auto; 
+    border: 8px solid;
+    border-image: linear-gradient(to right, aqua, orange);
+    border-image-slice: 1;
+}
+
+
