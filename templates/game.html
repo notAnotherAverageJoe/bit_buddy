@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Mining Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        input {
+            font-size: 20px;
+            padding: 10px;
+            margin: 10px;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Crypto Mining Game!</h1>
+        <p>Your task is to find the correct nonce to mine a block. Each nonce is a <span id="nonce-length">{{ nonce_length }}</span>-digit number.</p>
+        <input type="text" id="nonce" maxlength="{{ nonce_length }}">
+        <button onclick="mineBlock()">Submit Nonce</button>
+        <div class="message" id="message"></div>
+    </div>
+
+    <script>
+        function mineBlock() {
+            const nonce = document.getElementById('nonce').value;
+            fetch('/mine', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `nonce=${nonce}`,
+            })
+            .then(response => response.json())
+            .then(data => {
+                const messageDiv = document.getElementById('message');
+                if (data.error) {
+                    messageDiv.textContent = data.error;
+                    messageDiv.style.color = 'red';
+                } else if (data.success) {
+                    messageDiv.textContent = data.success;
+                    messageDiv.style.color = 'green';
+                } else {
+                    messageDiv.textContent = `Incorrect nonce. You matched ${data.matching_digits} digits correctly. Try again.`;
+                    messageDiv.style.color = 'orange';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

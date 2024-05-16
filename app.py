@@ -481,11 +481,44 @@ def remove_cryptocurrency(currency_id):
 
 #test zone below
 
+from flask import Flask, render_template, request, jsonify
+import random
 
 
 
+def generate_nonce(length):
+    return ''.join(random.choices('0123456789', k=length))
 
+def check_nonce(correct_nonce, user_nonce):
+    matching_digits = sum(1 for digit1, digit2 in zip(correct_nonce, user_nonce) if digit1 == digit2)
+    return matching_digits
 
+nonce_length = 4  # Difficulty level of the mining process
+correct_nonce = generate_nonce(nonce_length)
+
+@app.route('/game')
+def game():
+    return render_template('mining/crypto_mine.html', nonce_length=nonce_length)
+
+@app.route('/mine', methods=['POST'])
+def mine():
+    global correct_nonce
+    user_nonce = request.form['nonce']
+    if len(user_nonce) != nonce_length or not user_nonce.isdigit():
+        return jsonify({"error": f"Invalid input. Please enter a {nonce_length}-digit number."})
+
+    matching_digits = check_nonce(correct_nonce, user_nonce)
+    if matching_digits == nonce_length:
+        correct_nonce = generate_nonce(nonce_length)  # Generate a new nonce for the next mining round
+        return jsonify({"success": "Congratulations! You've successfully mined a block."})
+    else:
+        return jsonify({"matching_digits": matching_digits})
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+
+
+

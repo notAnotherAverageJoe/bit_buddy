@@ -1,29 +1,41 @@
+.information-text {
+    color:#eda200;
+}
+
+
+
 nav {
     background-color: aqua;
 }
 
-
-
-body {
-    font-family: 'Teko', sans-serif; 
-    font-size: 24px;
-    background-color: #000000;
-    color: whitesmoke;
+.custom-font {
+    font-family: 'Raleway', sans-serif;
+    font-size: 23px; 
+    font-weight: 500; 
+   
 }
 
 
-
-
+/* 
 .nav-link {
     font-size: 22px;
 }
-
+ */
 
 
 .navbar-brand {
     font-size: 22px;
 }
  
+
+
+body {
+    font-family: 'Raleway', sans-serif; 
+    font-size: 24px;
+    background-color: #000000;
+    color: whitesmoke;
+}
+
 
 .btn-primary {
     background-color: #eda200;
@@ -75,3 +87,24 @@ body {
 }
 
 
+
+
+h2 {
+    color: aqua;
+}
+ 
+strong {
+    color: aqua;
+}
+
+
+.button-style {
+    text-decoration: none;
+    font-size: 24px;
+    color: black;
+    background-color: #eda200;
+    margin-right: 20px;
+    box-shadow: 0 0 10px orange;
+    padding: 10px 20px;
+    border-radius: 5px;
+}

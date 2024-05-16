@@ -4,20 +4,16 @@
 
 {% block content %}
     <div style="text-align: center;  padding: 50px;">
-        <h1 style="color: #0ff;">Welcome to Bit Buddy!</h1>
+        <h1 >Welcome to Bit Buddy!</h1>
         <p style="color: #0ff; ">The Ultimate Cryptocurrency Companion! Your Crypto journey begins here!</p>
-        <img src="{{ url_for('static', filename='assets/poshome.jpg') }}" alt="Bitcoin Image" style="width: 60%; border: 8px solid #0ff; border-radius: 15px; box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);">
+        <img src="{{ url_for('static', filename='assets/againhome.jpg') }}" alt="Bitcoin Image" style="width: 60%; border: 8px solid #0ff; border-radius: 15px; box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);">
 
         <p style="color: #0ff; ">Explore the world of cryptocurrency with Bit Buddy. Whether you're a seasoned space traveler or just getting started, we've got you covered.</p>
         <div style="margin-top: 20px;">
-            <a href="{{ url_for('api') }}" style="text-decoration: none; font-size: 24px; color: black; 
-            background-color: #eda200; margin-right: 20px;
-             box-shadow: 0 0 10px orange; padding: 10px 20px; 
-             border-radius: 5px;">Explore API</a>
-            <a href="{{ url_for('register') }}" style="text-decoration: none; 
-            font-size: 24px; color: black; background-color: #eda200; margin-right: 20px;
-             box-shadow: 0 0 10px orange; padding: 10px 20px; 
-             border-radius: 5px;">Join Bit Buddy</a>
+            <a href="{{ url_for('api') }}" class="button-style">Explore API</a>
+            <a href="{{ url_for('register') }}" class="button-style">Register</a>
+
+             
 
         </div>
     </div>

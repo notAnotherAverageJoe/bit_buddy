@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% set show_navbar = True %}
 {% block content %}
-    <h2>Blockchain Information</h2>
+    <h1>Blockchain Information</h1>
     <div class="data-container">
         <div class="text-container">
             <p><strong>Block Height:</strong> {{ block_height }}</p>
@@ -13,9 +13,9 @@
         </div>
     </div>
     
-    <div style="background-color: aqua; padding: 10px; margin-top: 20px;">
-        <h3>What is Blockchain?</h3>
-        <p>
+    <div>
+        <h2>What is Blockchain?</h2>
+        <p class="information-text">
             Blockchain is a decentralized and distributed digital ledger that 
             records transactions across multiple computers in a way that is 
             <strong>secure, transparent, and tamper-resistant.</strong> 
@@ -23,9 +23,9 @@
              and each block is linked to the previous one, forming a chain of blocks.
         </p>
     </div>
-    <div style="background-color: #eda200; padding: 10px; margin-top: 20px;">
-        <h3>What is Blockchain Time & Height?</h3>
-        <p>locks that have been 
+    <div>
+        <h2>What is Blockchain Time & Height?</h2>
+        <p class="information-text">locks that have been 
             added to the blockchain preceding a spe
             Block height refers to the number of bcific block. 
             It essentially indicates the position of a block within the blockchain.
@@ -54,12 +54,12 @@
             In summary, block height is a fundamental concept in blockchain 
             technology that provides a way to organize, validate, and secure the transactions
              recorded in the blockchain. 
-           
+           </p>
         </div>
 
-        <div style="background-color: aqua; padding: 10px; margin-top: 20px;">
-            <h3>What is The Timestamp?</h3>
-            <p>
+        <div>
+            <h2>What is The Timestamp?</h2>
+            <p class="information-text">
                 "Time" refers to the timestamp associated with a specific block. 
                 This timestamp represents the exact moment when the block was created or mined.
    
@@ -76,22 +76,22 @@
 
         </p>
     
-    <div style="background-color: #eda200; padding: 10px; margin-top: 20px;">
-        <h3>Benefits of Blockchain</h3>
+    <div>
+        <h2>Benefits of Blockchain</h2>
         <ul>
-            <li><strong>Transparency:</strong> Blockchain provides transparency as all transactions are recorded and visible to all participants in the network.</li>
-            <li><strong>Security:</strong> Blockchain uses cryptographic techniques to ensure that transactions are secure and tamper-proof.</li>
-            <li><strong>Decentralization:</strong> Blockchain operates without a central authority, making it resistant to censorship and single points of failure.</li>
-            <li><strong>Efficiency:</strong> Blockchain streamlines processes by eliminating the need for intermediaries and reducing the time and cost of transactions.</li>
+            <li class="information-text"><strong>Transparency:</strong> Blockchain provides transparency as all transactions are recorded and visible to all participants in the network.</li>
+            <li class="information-text"><strong>Security:</strong> Blockchain uses cryptographic techniques to ensure that transactions are secure and tamper-proof.</li>
+            <li class="information-text"><strong>Decentralization:</strong> Blockchain operates without a central authority, making it resistant to censorship and single points of failure.</li>
+            <li class="information-text"><strong>Efficiency:</strong> Blockchain streamlines processes by eliminating the need for intermediaries and reducing the time and cost of transactions.</li>
         </ul>
     </div>
-    <div style="background-color: aqua; padding: 10px; margin-top: 20px;">
-        <h3>Possible Uses of Blockchain</h3>
+    <div>
+        <h2>Possible Uses of Blockchain</h2>
         <ul>
-            <li><strong>Financial Services:</strong> Blockchain can be used for secure and efficient financial transactions, such as payments, remittances, and settlements.</li>
-            <li><strong>Supply Chain Management:</strong> Blockchain enables transparent and traceable supply chains, allowing businesses to track the flow of goods from production to delivery.</li>
-            <li><strong>Identity Management:</strong> Blockchain can provide a secure and decentralized way to manage digital identities, reducing the risk of identity theft and fraud.</li>
-            <li><strong>Voting Systems:</strong> Blockchain can be used to create secure and transparent voting systems, ensuring the integrity of elections and reducing the risk of fraud.</li>
+            <li class="information-text"><strong>Financial Services:</strong> Blockchain can be used for secure and efficient financial transactions, such as payments, remittances, and settlements.</li>
+            <li class="information-text"><strong>Supply Chain Management:</strong> Blockchain enables transparent and traceable supply chains, allowing businesses to track the flow of goods from production to delivery.</li>
+            <li class="information-text"><strong>Identity Management:</strong> Blockchain can provide a secure and decentralized way to manage digital identities, reducing the risk of identity theft and fraud.</li>
+            <li class="information-text"><strong>Voting Systems:</strong> Blockchain can be used to create secure and transparent voting systems, ensuring the integrity of elections and reducing the risk of fraud.</li>
         </ul>
     </div>
 {% endblock %}
