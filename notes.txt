@@ -5,7 +5,12 @@
 put in instructions how to properly use api 
  export COINMARKETCAP_API_KEY="83359cfc-fe02-4a59-8e98-89d640bbadf9"
 
+  code to push - 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
 
+
+
+
+  
  code to stop my bitcoin from deletion
 
  -- Step 1: Create Trigger Function

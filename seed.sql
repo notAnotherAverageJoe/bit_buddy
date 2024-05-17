@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS bitbuddy;
+
 -- Create the database "bitbuddy"
 CREATE DATABASE bitbuddy;
 

@@ -1,3 +1,4 @@
+import subprocess
 import bcrypt
 from flask import Flask, render_template, session, redirect, url_for, flash
 from crypto_api import get_bitcoin_data, get_blockchain_info
@@ -20,9 +21,18 @@ app.config['SECRET_KEY'] = "testingtacos"
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql:///bitbuddy"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+
+def seed_database():
+    try:
+        subprocess.run(["psql", "-d", "bitbuddy", "-U", "joseph", "-f", "seed.sql"])
+        print("Database seeded successfully!")
+    except Exception as e:
+        print("Error while seeding the database:", e)
+        
 connect_db(app)
 # with app.app_context():
 #      db.create_all()
+seed_database()
 
 
 @app.route("/")
@@ -454,27 +464,32 @@ def get_cryptocurrency(currency_id):
     # Return the cryptocurrency data in JSON format
     return jsonify(cryptocurrency=cryptocurrency_entry.to_dict())
 
-
 @app.route("/api/cryptocurrencies/<int:currency_id>", methods=["PATCH"])
 def update_cryptocurrency(currency_id):
     """Update cryptocurrency from data in request. Return updated data."""
+    try:
+        # Get the JSON data from the request
+        data = request.json
 
-    # Get the JSON data from the request
-    data = request.json
+        # Query the database for the cryptocurrency with the given ID
+        cryptocurrency_data = cryptocurrency.query.get_or_404(currency_id)
 
-    # Query the database for the cryptocurrency with the given ID
-    cryptocurrency_data = cryptocurrency.query.get_or_404(currency_id)
+        # Update the cryptocurrency data with the values from the request
+        cryptocurrency_data.name = data.get('name', cryptocurrency_data.name)
+        cryptocurrency_data.symbol = data.get('symbol', cryptocurrency_data.symbol)
+        cryptocurrency_data.descriptions = data.get('descriptions', cryptocurrency_data.descriptions)
 
-    # Update the cryptocurrency data with the values from the request
-    cryptocurrency_data.name = data['name']
-    cryptocurrency_data.symbol = data['symbol']
-    cryptocurrency_data.descriptions = data['descriptions']
+        # Commit the changes to the database
+        db.session.commit()
 
-    # Commit the changes to the database
-    db.session.commit()
+        # Return the updated cryptocurrency data in JSON format
+        return jsonify(cryptocurrency=cryptocurrency_data.to_dict()), 200
+    except Exception as e:
+        # Log the error
+        app.logger.error(f"Error updating cryptocurrency: {e}")
+        # Return an error response with status code 500
+        return jsonify(error="Internal Server Error"), 500
 
-    # Return the updated cryptocurrency data in JSON format
-    return jsonify(cryptocurrency=cryptocurrency_data.to_dict())
 
 
 from flask import jsonify
@@ -502,9 +517,10 @@ def remove_cryptocurrency(currency_id):
     # Return a JSON confirmation message
     return jsonify(message="Cryptocurrency deleted")
 
-   
 
-#test zone below
+############################^^^^ Restful api for cryptocurrency above ^^^^####################
+
+#############################vvvv Crypto mining game below vvvv #############################33
 
 from flask import Flask, render_template, request, jsonify
 import random
