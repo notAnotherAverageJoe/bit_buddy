@@ -6,6 +6,7 @@ from models import TransactionHistory, connect_db, db, User
 from flask import Flask
 from models import cryptocurrency, User
 from flask_cors import CORS # type: ignore
+from decimal import ROUND_HALF_UP, Decimal
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt()
 
@@ -172,6 +173,7 @@ def blockchain():
 def get_user_id():
     # Implement this function to retrieve the user's ID from the session
     return session.get('user_id')
+
 @app.route('/bitcoinbuy', methods=['GET', 'POST'])
 def bitcoin_buy():
     # Check if the user is logged in
@@ -181,7 +183,7 @@ def bitcoin_buy():
 
     bitcoin_data = get_bitcoin_data()
     if bitcoin_data:
-        bitcoin_price = bitcoin_data['quote']['USD']['price']
+        bitcoin_price = float("{:.2f}".format(bitcoin_data['quote']['USD']['price']))
         bitcoin_symbol = bitcoin_data['symbol']
     else:
         bitcoin_price = None
@@ -190,33 +192,38 @@ def bitcoin_buy():
     if request.method == 'POST':
         # Handles the bitcoin buy operation
         bitcoin_amount = request.form['bitcoin_amount']
-        total_cost = float(bitcoin_amount) * bitcoin_price
+        try:
+            bitcoin_amount_float = float(bitcoin_amount)
+            total_cost = bitcoin_amount_float * bitcoin_price
+            total_cost_formatted = "{:.2f}".format(total_cost)
 
-        # Retrieve the current user's ID from the session
-        user_id = get_user_id()
+            # Retrieve the current user's ID from the session
+            user_id = get_user_id()
 
-        # Query the database to find the user by user ID
-        user = User.query.get(user_id)
+            # Query the database to find the user by user ID
+            user = User.query.get(user_id)
 
-        if user:
-            # Save transaction to the database
-            new_transaction = TransactionHistory(
-                user_id=user_id,
-                cryptocurrency_id=1,  # hard coded due to time limitations, left open for future coins
-                transaction_type='buy',
-                amount=float(bitcoin_amount)
-            )
-            db.session.add(new_transaction)
-            db.session.commit()
+            if user:
+                # Save transaction to the database
+                new_transaction = TransactionHistory(
+                    user_id=user_id,
+                    cryptocurrency_id=1,  # hard coded due to time limitations, left open for future coins
+                    transaction_type='buy',
+                    amount=bitcoin_amount_float
+                )
+                db.session.add(new_transaction)
+                db.session.commit()
 
-            buy_confirmation = f'Bought {bitcoin_amount} {bitcoin_symbol} at ${bitcoin_price} each. Total cost: ${total_cost}'
-            return render_template('/users/bitcoin_buy.html', bitcoin_price=bitcoin_price, bitcoin_symbol=bitcoin_symbol, buy_confirmation=buy_confirmation)
-        else:
-            # Handle the case where the user does not exist
-            return "User does not exist"
+                buy_confirmation = f'Bought {bitcoin_amount} {bitcoin_symbol} at ${bitcoin_price} each. Total cost: ${total_cost_formatted}'
+                return render_template('/users/bitcoin_buy.html', bitcoin_price=bitcoin_price, bitcoin_symbol=bitcoin_symbol, buy_confirmation=buy_confirmation)
+            else:
+                # Handle the case where the user does not exist
+                return "User does not exist"
+        except ValueError:
+            # Handle invalid input for bitcoin_amount
+            return "Invalid amount entered. Please enter a valid number."
     else:
         return render_template('/users/bitcoin_buy.html', bitcoin_price=bitcoin_price, bitcoin_symbol=bitcoin_symbol)
-
 
 
 
@@ -229,7 +236,7 @@ def bitcoin_sell():
 
     bitcoin_data = get_bitcoin_data()
     if bitcoin_data:
-        bitcoin_price = bitcoin_data['quote']['USD']['price']
+        bitcoin_price = float("{:.2f}".format(bitcoin_data['quote']['USD']['price']))
         bitcoin_symbol = bitcoin_data['symbol']
     else:
         bitcoin_price = None
@@ -238,35 +245,41 @@ def bitcoin_sell():
     if request.method == 'POST':
         # Handle sell operation
         bitcoin_amount = request.form['bitcoin_amount']
-        total_earning = float(bitcoin_amount) * bitcoin_price
+        try:
+            bitcoin_amount_float = float(bitcoin_amount)
+            total_earning = bitcoin_amount_float * bitcoin_price
+            total_earning_formatted = "{:.2f}".format(total_earning)
 
-        # Retrieve the current user's ID from the session
-        user_id = get_user_id()
+            # Retrieve the current user's ID from the session
+            user_id = get_user_id()
 
-        # Query the database to find the user by user ID
-        user = User.query.get(user_id)
+            # Query the database to find the user by user ID
+            user = User.query.get(user_id)
 
-        if user:
-            # Save transaction to the database
-            new_transaction = TransactionHistory(
-                user_id=user_id,
-                cryptocurrency_id=1,  # Replace with the appropriate cryptocurrency ID
-                transaction_type='sell',
-                amount=float(bitcoin_amount)
-            )
-            db.session.add(new_transaction)
-            db.session.commit()
+            if user:
+                # Save transaction to the database
+                new_transaction = TransactionHistory(
+                    user_id=user_id,
+                    cryptocurrency_id=1,  # Replace with the appropriate cryptocurrency ID
+                    transaction_type='sell',
+                    amount=bitcoin_amount_float
+                )
+                db.session.add(new_transaction)
+                db.session.commit()
 
-            sell_confirmation = f'Sold {bitcoin_amount} {bitcoin_symbol} at ${bitcoin_price} each. Total earning: ${total_earning}'
-            return render_template('/users/bitcoin_sell.html', bitcoin_price=bitcoin_price, bitcoin_symbol=bitcoin_symbol, sell_confirmation=sell_confirmation)
-        else:
-            # Handle the case where the user does not exist
-            return "User does not exist"
+                sell_confirmation = f'Sold {bitcoin_amount} {bitcoin_symbol} at ${bitcoin_price} each. Total earning: ${total_earning_formatted}'
+                return render_template('/users/bitcoin_sell.html', bitcoin_price=bitcoin_price, bitcoin_symbol=bitcoin_symbol, sell_confirmation=sell_confirmation)
+            else:
+                # Handle the case where the user does not exist
+                return "User does not exist"
+        except ValueError:
+            # Handle invalid input for bitcoin_amount
+            return "Invalid amount entered. Please enter a valid number."
     else:
         return render_template('/users/bitcoin_sell.html', bitcoin_price=bitcoin_price, bitcoin_symbol=bitcoin_symbol)
 
 
-from decimal import Decimal
+
 
 @app.route('/money-made')
 def money_made():
@@ -303,6 +316,8 @@ def money_made():
             
                 # Now perform the multiplication
             total_value = transaction.amount * bitcoin_price_decimal
+            
+            total_value = Decimal(str(total_value)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
 
             # Adjust total_money_made based on transaction type
             if transaction.transaction_type == 'buy':
@@ -318,25 +333,35 @@ def money_made():
 
 from flask import request
 
+from decimal import Decimal, ROUND_HALF_UP
+
 @app.route('/calculate-staking', methods=['POST'])
 def calculate_staking():
     if request.method == 'POST':
         # Retrieve the total money made from the form data
-        total_money_made = float(request.form['total_money_made'])
+        total_money_made = Decimal(request.form['total_money_made'])
 
         # Calculate staking returns for different periods at 10% interest
-        interest_rate = 0.10
+        interest_rate = Decimal('0.10')
         periods = [30, 60, 90, 120, 150, 175, 180, 210, 240, 270, 300, 330, 365]
 
         # Calculate staking returns for each period and store in a dictionary
         staking_returns = {}
         for days in periods:
-            staking_returns[days] = (total_money_made * (1 + interest_rate) ** (days / 365)) - total_money_made
+            # Convert days to Decimal to ensure accurate calculations
+            days_decimal = Decimal(days)
+
+            # Calculate staking return with Decimal arithmetic
+            staking_return = (total_money_made * (Decimal('1') + interest_rate) ** (days_decimal / Decimal('365'))) - total_money_made
+
+            # Round the staking return to two decimal places
+            staking_returns[days] = staking_return.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
 
         return render_template('/users/staking_result.html', staking_returns=staking_returns)
     else:
         # Handle other HTTP methods if needed
-        return "Method Not Allowed", 405  # Method Not Allowed status code
+        return "Method Not Allowed", 405
+
 
 
 @app.route('/transaction-history')

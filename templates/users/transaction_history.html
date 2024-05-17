@@ -26,6 +26,15 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <div class="text-center mt-3">
+                <a href="{{ url_for('bitcoin_buy') }}" class="btn btn-teal btn-outline-primary me-3">Buy Bitcoin</a>
+                <a href="{{ url_for('bitcoin_sell') }}" class="btn btn-teal btn-outline-primary me-3">Sell Bitcoin</a>
+                <a href="{{ url_for('money_made') }}" class="btn btn-teal btn-outline-primary me-3">Your Bitcoin value & Staking</a>
+                <a href="{{ url_for('dashboard') }}" class="btn btn-teal btn-outline-primary me-3">Back to Dashboard!</a>
+                <form action="{{ url_for('game') }}" method="get" style="display: inline;">
+                    <button type="submit" class="btn btn-primary">Start Mining ⛏️💰</button>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

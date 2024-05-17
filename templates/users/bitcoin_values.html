@@ -2,10 +2,22 @@
 {% set show_navbar = True %}
 {% block content %}
 <div class="container">
-    <h1 class="my-4">Bitcoin Wallet</h1>
+    <h1>Bitcoin Wallet</h1>
     <div class="card">
         <div class="card-body">
             <p class="card-text">Total amount of money your Bitcoins are worth: ${{ total_money_made }}</p>
+            <p class="card-text"> If you sell more Bitcoins than you currently own,
+                 your total Bitcoin balance will become negative. 
+                 This situation can occur in financial scenarios such as short selling.
+
+                For example, if you own 5 Bitcoins and sell 10 Bitcoins, 
+                your Bitcoin balance would be -5. This means you owe 5 Bitcoins.
+                
+                In this case, while you have received cash from selling those extra 5 Bitcoins, 
+                you now have a debt in Bitcoins. So, your cash balance increases,
+                 but your Bitcoin balance is negative, 
+                 indicating that you need to buy back those 5 Bitcoins to cover your debt.
+            </p>
             <form action="/calculate-staking" method="post">
                 <input type="hidden" name="total_money_made" value="{{ total_money_made }}">
                 <button type="submit" class="btn btn-primary">Calculate Staking</button>
