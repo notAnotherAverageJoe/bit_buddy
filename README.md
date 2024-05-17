@@ -8,3 +8,6 @@
 
     to use my API for cryptocurrency 
     curl http://localhost:5000/api/cryptocurrencies
+
+
+git add project_proposal.md initial_project_ideas.md README.md schemacrow.png
