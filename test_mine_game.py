@@ -4,7 +4,7 @@ from app import correct_nonce, nonce_length
 
 
 # Run the tests with this:
-#                         python -m unittest tests_mine_game.py 
+#                         python -m unittest test_mine_game.py 
 
 
 class TestMining(unittest.TestCase):

@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="container">
-        <h1 class="text-center mt-5">Welcome to the Dashboard, {{ username }}</h1>
+        <h1 class="text-center mt-5 gradient-text">Welcome to the Dashboard, {{ username }}</h1>
         <p class="text-center">Your email: {{ email }}</p>
         <div class="text-center mt-3">
             <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary me-3">Logout</a>

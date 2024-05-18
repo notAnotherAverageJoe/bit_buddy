@@ -178,3 +178,63 @@ tr {
     box-shadow: 0 0 30px aqua, 0 0 30px orange;
 
 }
+
+/* 
+
+.gradient-text {
+    font-size: 2.5em;
+    font-weight: bold;
+    background: linear-gradient(90deg, aqua, orange);
+    background-size: 200%;
+    background-clip: text;
+    color: transparent;
+    animation: gradient 3s linear infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 100%;
+    }
+    100% {
+        background-position: 0%;
+    }
+} */
+
+
+/* .gradient-text {
+    font-size: 2.5em;
+    font-weight: bold;
+    background: linear-gradient(90deg, aqua, orange);
+    background-size: 200%;
+    background-clip: text;
+    color: transparent;
+    animation: gradient 5s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 100%;
+    }
+    100% {
+        background-position: 0%;
+    }
+} */
+
+.gradient-text {
+    font-size: 2.5em;
+    font-weight: bold;
+    background: linear-gradient(90deg, aqua, orange);
+    background-size: 200%;
+    background-clip: text;
+    color: transparent;
+    animation: gradient 10s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite;
+}
+
+@keyframes gradient {
+    0%, 100% {
+        background-position: 0%;
+    }
+    50% {
+        background-position: 100%;
+    }
+}

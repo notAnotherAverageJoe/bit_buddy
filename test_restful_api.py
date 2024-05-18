@@ -3,7 +3,7 @@ from app import app,seed_database
 from models import cryptocurrency, db
 
 
-#   python -m unittest -v tests_restful_api.py
+#   python -m unittest -v test_restful_api.py
 
 app.config['SECRET_KEY'] = "testingtacos"
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql:///bitbuddy"

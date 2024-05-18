@@ -6,7 +6,7 @@ from unittest.mock import patch
 from decimal import Decimal
 
 
-# How to run the test  -> python -m unittest -v tests_bitcoin_routes.py
+# How to run the test  -> python -m unittest -v test_bitcoin_routes.py
 
 app.config['SECRET_KEY'] = "testingtacos"
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql:///bitbuddy_test"  # Use a test database
@@ -42,7 +42,7 @@ class TestBitcoinRoutes(unittest.TestCase):
             
             response = client.get('/bitcoinbuy')
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b'Current Bitcoin Price: $50000.0', response.data)  # Adjusted text
+            self.assertIn(b'Current Bitcoin Price: $50000.0', response.data)  
             self.assertIn(b'Buy Bitcoin', response.data)
 
     @patch('app.get_bitcoin_data')
