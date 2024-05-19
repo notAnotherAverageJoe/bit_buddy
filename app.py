@@ -8,7 +8,6 @@ from models import cryptocurrency, User
 from flask_cors import CORS # type: ignore
 from decimal import ROUND_HALF_UP, Decimal
 from flask_bcrypt import Bcrypt
-
 from flask import Flask, render_template, redirect, url_for, request, session, flash
 from werkzeug.security import check_password_hash
 from flask_bcrypt import check_password_hash
@@ -23,21 +22,25 @@ app.config['SECRET_KEY'] = "testingtacos"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql:///bitbuddy"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-
 def seed_database():
     try:
         subprocess.run(["psql", "-d", "bitbuddy", "-U", "joseph", "-f", "seed.sql"])
         print("Database seeded successfully!")
     except Exception as e:
         print("Error while seeding the database:", e)
+
         
 connect_db(app)
 # with app.app_context():
-#      db.create_all()
-seed_database()
+#     db.create_all()
+#     cryptocurrency.seed_database()
+# seed_database()
 
 
+
+        
+        
+        
 @app.route("/")
 def home():
     """homepage"""
@@ -515,6 +518,7 @@ def remove_cryptocurrency(currency_id):
 
     # Return a JSON confirmation message
     return jsonify(message="Cryptocurrency deleted")
+
 
 
 ############################^^^^ Restful api for cryptocurrency above ^^^^####################

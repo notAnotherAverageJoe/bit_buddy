@@ -3,6 +3,9 @@ from app import app, db, seed_database, bcrypt
 from models import User
 from flask import session
 
+#     python -m unittest test_login_register.py 
+
+
 class AuthTests(unittest.TestCase):
 
     def setUp(self):

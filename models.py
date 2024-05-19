@@ -32,7 +32,9 @@ class cryptocurrency(db.Model):
             'symbol': self.symbol,
             'descriptions': self.descriptions
         }
+        
 
+        
 class TransactionHistory(db.Model):
     __tablename__ = 'transactionhistory'
     
