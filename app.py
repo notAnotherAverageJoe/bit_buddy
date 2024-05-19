@@ -1,6 +1,5 @@
 import subprocess
 import bcrypt
-from flask import Flask, render_template, session, redirect, url_for, flash
 from crypto_api import get_bitcoin_data, get_blockchain_info
 from forms import RegistrationForm
 from models import TransactionHistory, connect_db, db, User
@@ -9,8 +8,12 @@ from models import cryptocurrency, User
 from flask_cors import CORS # type: ignore
 from decimal import ROUND_HALF_UP, Decimal
 from flask_bcrypt import Bcrypt
-bcrypt = Bcrypt()
 
+from flask import Flask, render_template, redirect, url_for, request, session, flash
+from werkzeug.security import check_password_hash
+from flask_bcrypt import check_password_hash
+
+bcrypt = Bcrypt()
 
 app = Flask(__name__)
 CORS(app)
@@ -60,10 +63,6 @@ def register():
     return render_template('/users/register.html', title='Register', form=form)
 
 
-from flask import Flask, render_template, redirect, url_for, request, session, flash
-from werkzeug.security import check_password_hash
-from models import User
-from flask_bcrypt import check_password_hash
 
 
 
