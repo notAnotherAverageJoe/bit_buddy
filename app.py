@@ -36,9 +36,6 @@ connect_db(app)
 #     cryptocurrency.seed_database()
 # seed_database()
 
-
-
-        
         
         
 @app.route("/")
@@ -91,9 +88,6 @@ def login():
 
     # Render the login form template
     return render_template('/users/login.html')
-
-
-
 
 
 
@@ -316,17 +310,17 @@ def money_made():
 
     # Iterate through each transaction and calculate the total value
     for transaction in transactions:
-        # Get the current price of Bitcoin
+        
         bitcoin_price = get_bitcoin_price()
         
         if bitcoin_price is not None:
-            # Convert bitcoin_price to a Decimal object
+            
             bitcoin_price_decimal = Decimal(str(bitcoin_price))
 
             # Get the cryptocurrency associated with the transaction
             cryptocurrency_made = cryptocurrency.query.get(transaction.cryptocurrency_id)
             
-                # Now perform the multiplication
+                
             total_value = transaction.amount * bitcoin_price_decimal
             
             total_value = Decimal(str(total_value)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
@@ -371,17 +365,17 @@ def calculate_staking():
 
         return render_template('/users/staking_result.html', staking_returns=staking_returns)
     else:
-        # Handle other HTTP methods if needed
+        
         return "Method Not Allowed", 405
 
 
 
 @app.route('/transaction-history')
 def transaction_history():
-    # Retrieve the current user's ID (you need to implement this function)
+    
     user_id = get_user_id()
 
-    # Query transaction history for the current user
+
     user_transactions = TransactionHistory.query.filter_by(user_id=user_id).all()
 
     return render_template('/users/transaction_history.html', transactions=user_transactions)
@@ -390,13 +384,13 @@ def transaction_history():
 
 @app.route('/reset-transactions', methods=['POST'])
 def reset_transactions():
-    # Retrieve the current user's ID from the session
+   
     user_id = session.get('user_id')
 
     # Delete all transactions associated with the current user
     TransactionHistory.query.filter_by(user_id=user_id).delete()
 
-    # Commit the changes to the database
+    
     db.session.commit()
 
     # Redirect the user to their dashboard or any other relevant page
@@ -444,14 +438,14 @@ def create_cryptocurrency():
     db.session.add(new_cryptocurrency)
     
     try:
-        # Commit the changes to the database
+        
         db.session.commit()
 
         # Return the newly created cryptocurrency data in JSON format with HTTP status 201 CREATED
         return jsonify(cryptocurrency=new_cryptocurrency.to_dict()), 201
     
     except Exception as e:
-        # If an error occurs during commit, rollback changes and return an error response
+        
         db.session.rollback()
         return jsonify(error=str(e)), 500
 
@@ -483,7 +477,7 @@ def update_cryptocurrency(currency_id):
         cryptocurrency_data.symbol = data.get('symbol', cryptocurrency_data.symbol)
         cryptocurrency_data.descriptions = data.get('descriptions', cryptocurrency_data.descriptions)
 
-        # Commit the changes to the database
+       
         db.session.commit()
 
         # Return the updated cryptocurrency data in JSON format
@@ -541,6 +535,7 @@ def check_nonce(correct_nonce, user_nonce):
 
 nonce_length = 4  # Difficulty level of the mining process
 correct_nonce = generate_nonce(nonce_length)
+
 @app.route('/crypto_mining')
 def whats_mining():
     return render_template('mining/crypto_mine.html')
