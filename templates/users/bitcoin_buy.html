@@ -12,6 +12,9 @@
         {% endif %}
         <p>Type in any amount of Bitcoin you wish to buy! For example 1, 2, 3, 4, 5, or use decimals 0.11, 0.00000023</p>
         <p>This will allow you to buy full Bitcoins or pieces of Bitcoin! Remember this is not a real transaction so have fun with it!</p>
+        {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
         <form action="{{ url_for('bitcoin_buy') }}" method="POST" class="mt-4">
             <div class="mb-3">
                 <label for="bitcoin_amount" class="form-label">Bitcoin Amount:</label>  
@@ -30,5 +33,6 @@
                 <button type="submit" class="btn btn-teal btn-outline-primary me-3">Start Mining ⛏️💰</button>
             </form>
         </form>
+
     </div>
 {% endblock %}

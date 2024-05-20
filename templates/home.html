@@ -3,19 +3,45 @@
 {% block title %}Bit Buddy{% endblock %}
 
 {% block content %}
-    <div style="text-align: center;  padding: 50px;">
-        <h1 class="gradient-text" >Welcome to Bit Buddy!</h1>
+
+
+
+<div class="main-content">
+    <div class="sidebarimg">
+        <div class="notch"></div>
+        <div class="side-button left"></div>
+        <div class="side-button right"></div>
+        <h3 style="color: #fff; text-align: center; padding-top: 20px;">Bit Buddy!
+            <img src="{{ url_for('static', filename='assets/logo.ico') }}" alt="Logo" style="width: 30px; height: 30px; vertical-align: middle;">
+        </h3>
+        <p style="color: #fff; text-align: center;">We are here to help you learn about Bitcoin 
+            and cryptocurrency bit by bit.</p>
+        <img src="{{ url_for('static', filename='assets/more4.png') }}" alt="More Info" class="content-img">
+    </div>
+
+    <!-- Middle content -->
+    <div class="middle-content">
+        <h1 class="gradient-text">Welcome to Bit Buddy!</h1>
         <p class="information-text">The Ultimate Cryptocurrency Companion! Your Crypto journey begins here!</p>
         <img id="main-image" src="{{ url_for('static', filename='assets/againhome.jpg') }}" alt="Bitcoin Image" class="main-image">
-
-        <p style="color: #0ff; ">Explore the world of cryptocurrency with Bit Buddy. Whether you're a seasoned space traveler or just getting started, we've got you covered.</p>
+        <p style="color: #0ff;">Explore the world of cryptocurrency with Bit Buddy. Whether you're a seasoned 🚀Crypto traveler or just getting started, we've got you covered.</p>
         <div style="margin-top: 20px;">
             <a href="{{ url_for('api') }}" class="button-style">Explore API</a>
             <a href="{{ url_for('register') }}" class="button-style">Register</a>
-
-             
-
         </div>
     </div>
-{% endblock %}
 
+    <div class="sidebarimg">
+        <div class="notch"></div>
+        <div class="side-button left"></div>
+        <div class="side-button right"></div>
+        <h3 style="color: #fff; text-align: center; padding-top: 20px;">🚀Crypto!📈 
+            
+        </h3>
+        <p style="color: #fff; text-align: center;">Learn how to Buy/Sell Bitcoin! Then learn about how you can stake & mine! </p>
+        <img src="{{ url_for('static', filename='assets/teach.jpg') }}" alt="More Info" class="content-img">
+        
+    </div>
+</div>
+
+{% endblock %}
