@@ -182,60 +182,7 @@ def blockchain():
 
 
 ####################################----- vvvv User buy,sell,stake vvvv ----####################
-# def get_user_id():
-#     # Implement this function to retrieve the user's ID from the session
-#     return session.get('user_id')
 
-# @app.route('/bitcoinbuy', methods=['GET', 'POST'])
-# def bitcoin_buy():
-#     # Check if the user is logged in
-#     if 'user_id' not in session:
-#         # If not logged in, redirect to login page
-#         return redirect(url_for('login'))
-
-#     bitcoin_data = get_bitcoin_data()
-#     if bitcoin_data:
-#         bitcoin_price = float("{:.2f}".format(bitcoin_data['quote']['USD']['price']))
-#         bitcoin_symbol = bitcoin_data['symbol']
-#     else:
-#         bitcoin_price = None
-#         bitcoin_symbol = None
-
-#     if request.method == 'POST':
-#         # Handles the bitcoin buy operation
-#         bitcoin_amount = request.form['bitcoin_amount']
-#         try:
-#             bitcoin_amount_float = float(bitcoin_amount)
-#             total_cost = bitcoin_amount_float * bitcoin_price
-#             total_cost_formatted = "{:.2f}".format(total_cost)
-
-#             # Retrieve the current user's ID from the session
-#             user_id = get_user_id()
-
-#             # Query the database to find the user by user ID
-#             user = User.query.get(user_id)
-
-#             if user:
-#                 # Save transaction to the database
-#                 new_transaction = TransactionHistory(
-#                     user_id=user_id,
-#                     cryptocurrency_id=1,  # hard coded due to time limitations, left open for future coins
-#                     transaction_type='buy',
-#                     amount=bitcoin_amount_float
-#                 )
-#                 db.session.add(new_transaction)
-#                 db.session.commit()
-
-#                 buy_confirmation = f'Bought {bitcoin_amount} {bitcoin_symbol} at ${bitcoin_price} each. Total cost: ${total_cost_formatted}'
-#                 return render_template('/users/bitcoin_buy.html', bitcoin_price=bitcoin_price, bitcoin_symbol=bitcoin_symbol, buy_confirmation=buy_confirmation)
-#             else:
-#                 # Handle the case where the user does not exist
-#                 return "User does not exist"
-#         except ValueError:
-#             # Handle invalid input for bitcoin_amount
-#             return "Invalid amount entered. Please enter a valid number."
-#     else:
-#         return render_template('/users/bitcoin_buy.html', bitcoin_price=bitcoin_price, bitcoin_symbol=bitcoin_symbol)
 def get_user_id():
     return session.get('user_id')
 
@@ -290,56 +237,7 @@ def bitcoin_buy():
     )
 
 
-# @app.route('/bitcoinsell', methods=['GET', 'POST'])
-# def bitcoin_sell():
-#     # Check if the user is logged in
-#     if 'user_id' not in session:
-#         # If not logged in, redirect to login page
-#         return redirect(url_for('login'))
 
-#     bitcoin_data = get_bitcoin_data()
-#     if bitcoin_data:
-#         bitcoin_price = float("{:.2f}".format(bitcoin_data['quote']['USD']['price']))
-#         bitcoin_symbol = bitcoin_data['symbol']
-#     else:
-#         bitcoin_price = None
-#         bitcoin_symbol = None
-
-#     if request.method == 'POST':
-#         # Handle sell operation
-#         bitcoin_amount = request.form['bitcoin_amount']
-#         try:
-#             bitcoin_amount_float = float(bitcoin_amount)
-#             total_earning = bitcoin_amount_float * bitcoin_price
-#             total_earning_formatted = "{:.2f}".format(total_earning)
-
-#             # Retrieve the current user's ID from the session
-#             user_id = get_user_id()
-
-#             # Query the database to find the user by user ID
-#             user = User.query.get(user_id)
-
-#             if user:
-#                 # Save transaction to the database
-#                 new_transaction = TransactionHistory(
-#                     user_id=user_id,
-#                     cryptocurrency_id=1,  # Replace with the appropriate cryptocurrency ID
-#                     transaction_type='sell',
-#                     amount=bitcoin_amount_float
-#                 )
-#                 db.session.add(new_transaction)
-#                 db.session.commit()
-
-#                 sell_confirmation = f'Sold {bitcoin_amount} {bitcoin_symbol} at ${bitcoin_price} each. Total earning: ${total_earning_formatted}'
-#                 return render_template('/users/bitcoin_sell.html', bitcoin_price=bitcoin_price, bitcoin_symbol=bitcoin_symbol, sell_confirmation=sell_confirmation)
-#             else:
-#                 # Handle the case where the user does not exist
-#                 return "User does not exist"
-#         except ValueError:
-#             # Handle invalid input for bitcoin_amount
-#             return "Invalid amount entered. Please enter a valid number."
-#     else:
-#         return render_template('/users/bitcoin_sell.html', bitcoin_price=bitcoin_price, bitcoin_symbol=bitcoin_symbol)
 @app.route('/bitcoinsell', methods=['GET', 'POST'])
 def bitcoin_sell():
     # Check if the user is logged in

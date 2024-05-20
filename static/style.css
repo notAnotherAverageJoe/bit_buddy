@@ -82,8 +82,6 @@ body {
 }
 
 
-
-
 h2 {
     color: aqua;
 }
@@ -99,9 +97,9 @@ strong {
     color: black;
     background-color: #eda200;
     margin-right: 20px;
-    box-shadow: 0 0 10px orange;
+    box-shadow: 0 0 20px #eda200;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 20px;
 }
 
 .big-img {
@@ -180,8 +178,6 @@ tr {
 
 }
 
-
-
 .gradient-text {
     font-size: 2.5em;
     font-weight: bold;
@@ -200,15 +196,6 @@ tr {
         background-position: 100%;
     }
 }
-/* 
-.sidebarimg {
-    position: relative; width: 250px; height: 500px; background-color: #333; border-radius: 20px; margin-left: 20px;
-    border: 10px solid;
-    border-image: linear-gradient(to right, aqua, orange);
-    border-image-slice: 1;
-    box-shadow: 0 0 30px aqua, 0 0 30px orange;
-    
-} */
 
 .sidebarimg {
     position: relative;
@@ -230,31 +217,20 @@ tr {
     right: -10px;
     bottom: -10px;
     background: linear-gradient(to right, aqua, orange);
-    border-radius: 50px; /* Ensure the border-radius matches the main element */
+    border-radius: 50px; 
     z-index: -1;
     border: 10px solid transparent; /* Add a transparent border to ensure proper placement */
 }
 
 /* .notch {
-    position: absolute;
-    top: 3px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 20px;
-    background-color: #150b0b;
-    border-radius: 10px 10px 0 0;
-    z-index: 1;
-   
-} */
 
 .side-button {
     position: absolute;
     width: 6px;
     height: 40px;
-    background-color: #666;
+    background-color: orange;
     border-radius: 3px;
-} 
+/* }  */
 
 .side-button.left {
     left: -16px;
@@ -286,19 +262,9 @@ tr {
     display: block;
     max-width: 100%;
     height: auto;
-    margin: 20px auto 0 auto; /* Center the image and add top margin */
+    margin: 20px auto 0 auto; 
 }
 
-/* @keyframes breathing {
-    0% {
-        box-shadow: 0 0 20px aqua, 0 0 20px orange;
-    }
-    50% {
-        box-shadow: 0 0 40px aqua, 0 0 40px orange;
-    }
-    100% {
-        box-shadow: 0 0 20px aqua, 0 0 20px orange;
-    } */
 
     @keyframes breathing {
         0% {
