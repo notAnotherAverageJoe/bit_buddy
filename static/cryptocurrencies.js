@@ -93,7 +93,6 @@ $("#cryptocurrencies-list").on("click", ".update-button", async function (evt) {
 });
 
 /** Handle submitting update form */
-/** Handle submitting update form */
 $("#cryptocurrencies-list").on("submit", ".update-form", async function (evt) {
   evt.preventDefault();
   let $cryptocurrency = $(evt.target).closest("div");

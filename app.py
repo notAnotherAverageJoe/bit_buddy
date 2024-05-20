@@ -171,7 +171,7 @@ def blockchain():
         time = blockchain_info['time']
         block_hash = blockchain_info['hash']
     else:
-        # If blockchain_info is not available, assign default values
+        # If blockchain_info is not available, assign N/A
         block_height = "N/A"
         time = "N/A"
         block_hash = "N/A"
@@ -465,6 +465,8 @@ def get_cryptocurrency(currency_id):
     
     # Return the cryptocurrency data in JSON format
     return jsonify(cryptocurrency=cryptocurrency_entry.to_dict())
+
+
 
 @app.route("/api/cryptocurrencies/<int:currency_id>", methods=["PATCH"])
 def update_cryptocurrency(currency_id):
