@@ -6,17 +6,16 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container" style="text-align: center;">
         <h1>Welcome to the Crypto Mining Game!</h1>
         <p>Your task is to find the correct nonce to mine a block. Each nonce is a <span id="nonce-length">{{ nonce_length }}</span>-digit number.</p>
         <p>Type in any sequence of numbers between 0-9, for example: 1234, 5356, 0029, 9850 are all valid attempts!</p>
-        <input type="text" id="nonce" maxlength="{{ nonce_length }}">
-        <button class="btn-teal"onclick="mineBlock()">Submit Nonce</button>
-        <div class="message" id="message"></div>
+        <input type="text" id="nonce" maxlength="{{ nonce_length }}" style="margin: 0 auto;">
+        <button class="btn-teal" onclick="mineBlock()" style="display: block; margin: 10px auto;">Submit Nonce</button>
+        <div class="message" id="message" style="margin-top: 20px;"></div>
     </div>
    
-        <img class="big-img"src="{{ url_for('static', filename='assets/mining 3.png') }}" alt="Mining Image" >
-
+    <img class="big-img" src="{{ url_for('static', filename='assets/mining 3.png') }}" alt="Mining Image" style="display: block; margin: 20px auto;">
     
     <script>
         function mineBlock() {
