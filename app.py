@@ -31,13 +31,8 @@ def seed_database():
 
         
 connect_db(app)
-# with app.app_context():
-#     db.create_all()
-#     cryptocurrency.seed_database()
-# seed_database()
 
-        
-        
+
 @app.route("/")
 def home():
     """homepage"""
@@ -61,8 +56,6 @@ def register():
         flash('Your account has been created! You are now able to log in.', 'success')
         return redirect(url_for('login'))
     return render_template('/users/register.html', title='Register', form=form)
-
-
 
 
 
@@ -393,7 +386,7 @@ def reset_transactions():
     
     db.session.commit()
 
-    # Redirect the user to their dashboard or any other relevant page
+    
     return redirect(url_for('dashboard'))
 
 
@@ -426,7 +419,7 @@ from models import cryptocurrency
 def create_cryptocurrency():
     """Add cryptocurrency and return data about the new cryptocurrency."""
     
-    # Get JSON data from the request
+    
     data = request.json
 
     # Create a new cryptocurrency object using the provided data
