@@ -11,7 +11,7 @@ from flask_bcrypt import Bcrypt
 from flask import Flask, render_template, redirect, url_for, request, session, flash
 from werkzeug.security import check_password_hash
 from flask_bcrypt import check_password_hash
-
+#  live site version
 bcrypt = Bcrypt()
 
 app = Flask(__name__)
@@ -20,7 +20,8 @@ CORS(app)
 
 app.config['SECRET_KEY'] = "testingtacos"
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql:///bitbuddy"
+
+SQLALCHEMY_DATABASE_URI = "postgresql://joseph@dpg-cp8cd48l6cac73c2f7l0-a:5432/bitbuddy"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 def seed_database():
     try:
