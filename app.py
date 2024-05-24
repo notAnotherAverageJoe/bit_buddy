@@ -21,7 +21,7 @@ CORS(app)
 app.config['SECRET_KEY'] = "testingtacos"
 
 
-SQLALCHEMY_DATABASE_URI = "postgresql:///joseph@dpg-cp8cd48l6cac73c2f7l0-a:5432/bitbuddy"
+SQLALCHEMY_DATABASE_URI = "postgres://joseph:9k4o7SJ4DbwybATEzPqnkjzI5fJkLTmd@dpg-cp8cd48l6cac73c2f7l0-a/bitbuddy"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 def seed_database():
     try:
