@@ -4,7 +4,7 @@ from flask import Flask
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'testingtacos'  
-SQLALCHEMY_DATABASE_URI = "postgresql://joseph@dpg-cp8cd48l6cac73c2f7l0-a:5432/bitbuddy"
+SQLALCHEMY_DATABASE_URI = "postgresql:///joseph@dpg-cp8cd48l6cac73c2f7l0-a:5432/bitbuddy"
 db = SQLAlchemy(app)
 
 
