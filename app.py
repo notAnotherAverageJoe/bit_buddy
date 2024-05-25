@@ -32,7 +32,7 @@ def seed_database():
 
         
 connect_db(app)
-
+seed_database()
 
 @app.route("/")
 def home():
