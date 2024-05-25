@@ -265,3 +265,40 @@ tr {
             box-shadow: 0 0 30px aqua, 0 0 30px orange;
         }
 }
+/* ---------------------------------------- */
+
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sidebarimg, .middle-content {
+        margin: 10px 0;
+    }
+
+    .content-img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/* Additional Media Query for Very Small Screens */
+@media (max-width: 480px) {
+    .button-style {
+        font-size: 18px;
+        padding: 8px 16px;
+    }
+
+    .gradient-text {
+        font-size: 1.5em;
+    }
+
+    .main-content {
+        padding: 5px;
+    }
+
+    .sidebarimg, .middle-content {
+        padding: 10px;
+    }
+}
