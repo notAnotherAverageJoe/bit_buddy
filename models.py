@@ -1,10 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
+import os
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'testingtacos'  
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///bitbuddy'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgresql:///bitbuddy')
 db = SQLAlchemy(app)
 
 
