@@ -1,5 +1,6 @@
 import subprocess
 import bcrypt
+import psycopg2
 from crypto_api import get_bitcoin_data, get_blockchain_info
 from forms import RegistrationForm
 from models import TransactionHistory, connect_db, db, User
