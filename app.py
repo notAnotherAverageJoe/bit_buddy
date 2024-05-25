@@ -23,16 +23,16 @@ app.config['SECRET_KEY'] = "testingtacos"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://joseph:9k4o7SJ4DbwybATEzPqnkjzI5fJkLTmd@dpg-cp8cd48l6cac73c2f7l0-a/bitbuddy"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-def seed_database():
-    try:
-        subprocess.run(["psql", "-d", "bitbuddy", "-U", "joseph", "-f", "seed.sql"])
-        print("Database seeded successfully!")
-    except Exception as e:
-        print("Error while seeding the database:", e)
+# def seed_database():
+#     try:
+#         subprocess.run(["psql", "-d", "bitbuddy", "-U", "joseph", "-f", "seed.sql"])
+#         print("Database seeded successfully!")
+#     except Exception as e:
+#         print("Error while seeding the database:", e)
 
         
 connect_db(app)
-seed_database()
+
 
 @app.route("/")
 def home():
