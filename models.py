@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'testingtacos'  
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgresql:///bitbuddy')
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://joseph:9k4o7SJ4DbwybATEzPqnkjzI5fJkLTmd@dpg-cp8cd48l6cac73c2f7l0-a/bitbuddy"
 db = SQLAlchemy(app)
 
 
