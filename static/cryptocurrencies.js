@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = "https://bit-buddy.onrender.com/";
 
 /** Generate HTML for cryptocurrency */
 function generateCryptocurrencyHTML(cryptocurrency) {
