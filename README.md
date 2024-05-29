@@ -2,6 +2,9 @@
 
 BitBuddy is a cryptocurrency platform built with Flask that allows users to buy, sell, and stake cryptocurrencies, as well as providing access to real-time market data through external APIs.
 
+## Currently deployed at: 
+https://bit-buddy.onrender.com
+
 ## Features
 
 - User authentication and registration systems
